@@ -33,6 +33,7 @@ var Subject = React.createClass({
         value={this.props.text}
         onChange={this.emitChange}
         autoFocus={this.props.autoFocus}
+        placeholder="Your test string here."
       />
     );
   },

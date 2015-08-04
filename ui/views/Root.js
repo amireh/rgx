@@ -5,17 +5,12 @@ var getConfig = require("getConfig");
 var ColorSchemeSwitcher = require("components/ColorSchemeSwitcher");
 var ErrorNotifier = require("components/ErrorNotifier");
 var Banner = require('components/Banner');
-var appStore = require('AppStore').getSingleton();
+var appStore = require('AppStore');
 
 var { RouteHandler } = Router;
 
 var Root = React.createClass({
   mixins: [ Router.Navigation, Router.State ],
-  statics: {
-    willTransitionTo() {
-      console.log('>> transition << ');
-    }
-  },
 
   getDefaultProps() {
     return {
@@ -41,6 +36,7 @@ var Root = React.createClass({
 
         <ErrorNotifier
           error={appStore.getLatestError()}
+          internalError={appStore.getLatestInternalError()}
         />
 
         <RouteHandler

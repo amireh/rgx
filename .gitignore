@@ -12,3 +12,4 @@ vendor
 /npm-debug.log
 dialects/Java/*.class
 dialects/Java/target/
+/www/index.js

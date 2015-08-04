@@ -1,0 +1,40 @@
+{
+  "env": {
+    "browser": true,
+    "node": true
+  },
+
+  "plugins": [
+    "react"
+  ],
+
+	"ecmaFeatures": {
+		"destructuring": true,
+		"jsx": true,
+		"arrowFunctions": true,
+		"objectLiteralShorthandMethods": true
+	},
+
+	"rules": {
+    "no-trailing-spaces": 0,
+    "curly": 0,
+    "eqeqeq": 2,
+    "no-eq-null": 2,
+    "quotes": 0,
+    "strict": 0,
+    "comma-dangle": 0,
+    "comma-spacing": 0,
+  },
+  "globals": {
+    "describe": true,
+    "context": true,
+    "it": true,
+    "before": true,
+    "beforeEach": true,
+    "after": true,
+    "afterEach": true,
+    "expect": true,
+    "subject": true,
+    "mocha": true,
+  }
+}

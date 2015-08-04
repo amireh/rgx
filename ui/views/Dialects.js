@@ -1,5 +1,5 @@
 var React = require("react");
-var appStore = require("AppStore").getSingleton();
+var appStore = require("AppStore");
 var DialectPicker = require("components/DialectPicker");
 
 var Dialects = React.createClass({

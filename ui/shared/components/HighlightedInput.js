@@ -47,6 +47,7 @@ var HighlightedInput = React.createClass({
         <textarea
           ref="inputWidget"
           value={this.props.value}
+          placeholder={this.props.placeholder}
           autoFocus={this.props.autoFocus}
           readOnly
         />

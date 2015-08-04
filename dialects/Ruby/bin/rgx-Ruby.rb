@@ -17,10 +17,6 @@
 # along with rgx. If not, see <http://www.gnu.org/licenses/>.
 # -----------------------------------------------------------------------------
 
-# require 'rubygems'
-# require 'bundler/setup'
-
-# Bundler.require(:default)
 require 'json'
 
 RC_MATCH = 'RC_MATCH'

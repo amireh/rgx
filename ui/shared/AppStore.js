@@ -15,6 +15,13 @@ var FLAGS = flagFiles.keys().reduce(function(flags, flagFile) {
 }, {});
 
 class AppStore extends Store {
+  getInitialState() {
+    return {
+      error: null,
+      internalError: null
+    };
+  }
+
   getAvailableDialects() {
     return AVAILABLE_DIALECTS;
   }
@@ -27,14 +34,29 @@ class AppStore extends Store {
     return this.state.error;
   }
 
-  setError(error) {
-    // TODO: handle internal 500 errors too
-    this.setState({ error: error.message });
+  getLatestInternalError() {
+    return this.state.internalError;
+  }
+
+  setError(error, statusCode) {
+    switch (statusCode) {
+      case 400:
+      case 422:
+        this.setState({ error: error.message });
+      break;
+
+      default:
+        this.setState({ internalError: error.message });
+    }
   }
 
   clearError() {
     this.setState({ error: undefined });
   }
+
+  clearInternalError() {
+    this.setState({ internalError: undefined });
+  }
 }
 
-module.exports = AppStore;
+module.exports = new AppStore();

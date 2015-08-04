@@ -1,26 +1,6 @@
 var { extend } = require('lodash');
-var singletons = {};
 
 class Store {
-  static getSingleton() {
-    var constructor = this;
-    var name = constructor.name;
-
-    if (!singletons[name]) {
-      singletons[name] = new constructor();
-    }
-
-    return singletons[name];
-  }
-
-  static resetAllStores() {
-    for (var storeName in singletons) {
-      if (singletons.hasOwnProperty(storeName)) {
-        singletons[storeName].__reset__();
-      }
-    }
-  }
-
   constructor() {
     this.__reset__();
 
@@ -65,6 +45,10 @@ class Store {
    */
   __reset__() {
     this._callbacks = [];
+    this.clearState();
+  }
+
+  clearState() {
     this.state = this.getInitialState();
   }
 }

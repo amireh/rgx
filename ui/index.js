@@ -20,7 +20,7 @@ var router = Router.create({
 
       <Route
         name="editor"
-        path="/dialects/:dialect"
+        path="/dialects/:dialect/?:permalink?"
         handler={require("./views/Editor")}
       />
 

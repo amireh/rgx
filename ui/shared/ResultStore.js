@@ -3,6 +3,7 @@ var Store = require('Store');
 class ResultStore extends Store {
   getInitialState() {
     return {
+      permalink: null,
       results: []
     };
   }
@@ -10,6 +11,10 @@ class ResultStore extends Store {
   getAll() {
     return this.state.results;
   }
+
+  getPermalink() {
+    return this.state.permalink;
+  }
 }
 
-module.exports = ResultStore;
+module.exports = new ResultStore();

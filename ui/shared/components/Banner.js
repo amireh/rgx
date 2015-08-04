@@ -55,9 +55,9 @@ var Banner = React.createClass({
             {dialect.length > 0 &&
               <Popup
                 ref="popup"
-                content={DialectPicker}
+                content={React.createFactory(DialectPicker)}
                 activeDialect={dialect}
-                availableDialects={AppStore.getSingleton().getAvailableDialects()}
+                availableDialects={AppStore.getAvailableDialects()}
                 popupOptions={
                   {
                     position: {

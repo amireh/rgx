@@ -26,6 +26,10 @@ exports.adjustQuery = function(newQuery) {
   return query;
 };
 
+exports.replaceWith = function(to, params) {
+  delegate.replaceWith(to, params);
+};
+
 exports.assignDelegate = function(inDelegate) {
   delegate = inDelegate;
 };

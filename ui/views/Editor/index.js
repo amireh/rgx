@@ -1,8 +1,8 @@
 var React = require("react");
 var EditorView = require('./components/EditorView');
-var appStore = require('AppStore').getSingleton();
-var editorStore = require('EditorStore').getSingleton();
-var resultStore = require('ResultStore').getSingleton();
+var appStore = require('AppStore');
+var editorStore = require('EditorStore');
+var resultStore = require('ResultStore');
 var Actions = require('Actions');
 
 var Editor = React.createClass({
@@ -11,6 +11,16 @@ var Editor = React.createClass({
   componentDidMount: function() {
     editorStore.addChangeListener(this.reload);
     resultStore.addChangeListener(this.reload);
+
+    if (this.props.params.permalink) {
+      this.consumePermalink();
+    }
+  },
+
+  componentDidUpdate: function(prevProps) {
+    if (prevProps.params.permalink !== this.props.params.permalink) {
+      this.consumePermalink();
+    }
   },
 
   componentWillUnmount: function() {
@@ -29,6 +39,7 @@ var Editor = React.createClass({
         flags={editorStore.getFlags()}
         availableFlags={appStore.getAvailableFlags(dialect)}
         results={resultStore.getAll()}
+        permalink={resultStore.getPermalink()}
         activeSubjectId={editorStore.getActiveSubjectId()}
       />
     );
@@ -40,6 +51,10 @@ var Editor = React.createClass({
 
   getDialect() {
     return decodeURIComponent(this.props.params.dialect);
+  },
+
+  consumePermalink() {
+    Actions.retrievePermalink(this.props.params.permalink);
   }
 });
 

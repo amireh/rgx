@@ -2,7 +2,7 @@ var React = require("react");
 var classSet = require("react/lib/cx");
 
 /**
- * @class Events.Components.Button
+ * @class Components.Button
  *
  * A wrapper for `<button type="button" />` that abstracts the bootstrap CSS
  * classes we need to specify for buttons.

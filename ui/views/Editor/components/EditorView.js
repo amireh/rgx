@@ -6,10 +6,12 @@ var HTabbedPanel = require('components/HTabbedPanel');
 var Subject = require('./Subject');
 var FlagPicker = require('./FlagPicker');
 var ResultEmblem = require('./ResultEmblem');
+var ActionBar = require('./ActionBar');
 var Actions = require('Actions');
 var EllipsifedText = require('components/EllipsifedText');
 var { findWhere, pluck } = require('lodash');
 var K = require('constants');
+var { Link } = require('react-router');
 
 var EditorView = React.createClass({
   displayName: "EditorView",
@@ -37,9 +39,26 @@ var EditorView = React.createClass({
       return subjectResult.result.status === K.RC_BADPATTERN;
     });
 
+    var { permalink } = this.props;
+
     return(
       <div className="editor">
         <form onSubmit={this.consume}>
+          {permalink &&
+            <p>
+              Your pattern can now be permanently viewed by visiting
+              {' '}
+              <Link
+                to="permalink"
+                target="_blank"
+                params={{ dialect: permalink.dialect, permalink: permalink.id }}
+              >
+                this link
+              </Link>
+              .
+            </p>
+          }
+
           <div className="editor__pattern-and-flags">
             <Label className="flags-input-container" value="Flags">
               <CodeTextarea
@@ -58,6 +77,7 @@ var EditorView = React.createClass({
               <CodeTextarea
                 onChange={this.updatePattern}
                 value={this.props.pattern}
+                placeholder="foo(.*)"
                 autoFocus
               />
             </Label>
@@ -87,6 +107,10 @@ var EditorView = React.createClass({
               }
             </HTabbedPanel.Content>
           </HTabbedPanel>
+
+          <ActionBar
+            dialect={this.props.dialect}
+          />
 
           <FlagPicker
             flags={this.props.availableFlags}

@@ -1,12 +1,12 @@
 var Store = require('Store');
-var appStore = require('AppStore').getSingleton();
+var appStore = require('AppStore');
 var subjectUUID = 0;
 
 class EditorStore extends Store {
   getInitialState() {
     return {
-      pattern: 'foo(bar)',
-      subjects: [{ id: 's0011', position: 1, text: 'foobarzoo' }],
+      pattern: '',
+      subjects: [{ id: `s${subjectUUID}`, position: 1, text: '' }],
       flags: '',
       activeSubjectId: null,
     };
@@ -28,7 +28,7 @@ class EditorStore extends Store {
     return this.state.subjects;
   }
 
-  addSubject() {
+  addSubject(activate) {
     var subject = {
       id: `s${++subjectUUID}`,
       position: this.state.subjects.length+1,
@@ -36,7 +36,12 @@ class EditorStore extends Store {
     };
 
     this.state.subjects.push(subject);
-    this.setState({ activeSubjectId: subject.id });
+
+    if (activate !== false) {
+      this.setState({ activeSubjectId: subject.id });
+    }
+
+    return subject;
   }
 
   getFlags() {
@@ -50,4 +55,4 @@ class EditorStore extends Store {
   }
 }
 
-module.exports = EditorStore;
+module.exports = new EditorStore();

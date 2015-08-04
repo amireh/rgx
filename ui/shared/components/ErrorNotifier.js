@@ -7,25 +7,48 @@ var ErrorNotifier = React.createClass({
   },
 
   render() {
-    var { error } = this.props;
+    var { error, internalError } = this.props;
 
-    if (!error) {
+    if (!error && !internalError) {
       return null;
     }
 
     return(
       <div className="error-notifier">
-        Dang! An internal error has occured:
-        {' '}
-        <em className="error-notifier__message">{error}</em>
-        {' '}
-        <a onClick={this.dismiss}>Dismiss</a>
+        {internalError && this.renderInternalError(internalError)}
+        {error && this.renderError(error)}
+
+
       </div>
     );
   },
 
   dismiss: function() {
-    Actions.dismissError();
+    ;
+  },
+
+  renderError: function(message) {
+    return (
+      <div>
+        Error:
+        {' '}
+        <em className="error-notifier__message">{message}</em>
+        {' '}
+        <a onClick={Actions.dismissError}>Dismiss</a>
+      </div>
+    );
+  },
+
+  renderInternalError: function(message) {
+    return (
+      <div>
+        Dang! An internal error has occured:
+        {' '}
+        <em className="error-notifier__message">{message}</em>
+        {' '}
+        <a onClick={Actions.dismissInternalError}>Dismiss</a>
+      </div>
+    );
   }
 });
 

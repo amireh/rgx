@@ -1,9 +1,10 @@
-var appStore = require('AppStore').getSingleton();
-var editorStore = require('EditorStore').getSingleton();
-var resultStore = require('ResultStore').getSingleton();
+var appStore = require('AppStore');
+var editorStore = require('EditorStore');
+var resultStore = require('ResultStore');
 var { findWhere, pluck, debounce } = require('lodash');
 var ajax = require('utils/ajax');
 var { THROTTLE } = require("constants");
+var RouteActions = require('actions/RouteActions');
 
 var debouncedSubmit;
 
@@ -89,10 +90,58 @@ exports.dismissError = function() {
   appStore.clearError();
 };
 
+exports.dismissInternalError = function() {
+  appStore.clearInternalError();
+};
+
 /**
  * Called on every route transition. Here we get to clean up any state that
  * should not be carried across the pages, like error notifications.
  */
 exports.clearTransientState = function() {
   exports.dismissError();
+  exports.dismissInternalError();
+};
+
+exports.generatePermalink = function(dialect) {
+  var subjects = editorStore.getSubjects();
+  var params = {
+    pattern: editorStore.getPattern(),
+    subjects: pluck(subjects, 'text'),
+    flags: editorStore.getFlags()
+  };
+
+  ajax({
+    url: `/dialects/${dialect}/permalink`,
+    type: 'POST',
+    data: JSON.stringify(params),
+    headers: { 'Content-Type': 'application/json; charset=utf-8' },
+  }, function(payload) {
+    resultStore.setState({
+      permalink: {
+        dialect: dialect,
+        id: payload.href
+      }
+    });
+  }, appStore.setError.bind(appStore));
+};
+
+exports.retrievePermalink = function(permalink) {
+  ajax({ url: `/permalinks/${permalink}` }, function(payload) {
+    editorStore.clearState();
+    editorStore.setState({
+      pattern: payload.pattern,
+      subjects: payload.subjects.map(function(text) {
+        var subject = editorStore.addSubject(false);
+
+        subject.text = text;
+
+        return subject;
+      }),
+
+      flags: payload.flags
+    });
+
+    exports.submit(payload.dialect);
+  }, appStore.setError.bind(appStore));
 };
