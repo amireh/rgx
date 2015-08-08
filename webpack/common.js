@@ -6,6 +6,12 @@ var baseConfig = {
   devtool: nodeEnv === "production" ? null : "eval",
 
   resolve: {
+    // We will make webpack look in our own node_modules/ first so that any
+    // look-up from plugins to libraries we support, like react and lodash,
+    // won't resolve to that plugin's version of the library in its
+    // node_modules/ folder.
+    root: path.resolve(__dirname, '..', 'node_modules'),
+
     fallback: path.resolve(__dirname, "../node_modules"),
     modulesDirectories: [
       "css",

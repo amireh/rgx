@@ -14,7 +14,13 @@ exports.updatePattern = function(dialect, pattern) {
 };
 
 exports.updateFlags = function(dialect, flags) {
-  editorStore.setFlags(flags);
+  const availableFlags = pluck(appStore.getAvailableFlags(dialect), 'name');
+  const validFlags = flags.split('').filter(function(flag) {
+    return availableFlags.indexOf(flag) > -1;
+  }).join('');
+
+  editorStore.setFlags(validFlags);
+
   debouncedSubmit(dialect);
 };
 
