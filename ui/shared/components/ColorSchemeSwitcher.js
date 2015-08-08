@@ -1,11 +1,12 @@
 var React = require("react");
 var Button = require("components/Button");
 var Icon = require("components/Icon");
+var $ = require('jquery');
 var { AVAILABLE_SCHEMES, DEFAULT_SCHEME } = require("constants");
 
 var ColorSchemeSwitcher = React.createClass({
   componentDidMount: function() {
-    document.body.className = DEFAULT_SCHEME;
+    $(document.body).addClass(DEFAULT_SCHEME);
   },
 
   render() {

@@ -137,17 +137,19 @@ exports.retrievePermalink = function(permalink) {
     editorStore.clearState();
     editorStore.setState({
       pattern: payload.pattern,
-      subjects: payload.subjects.map(function(text) {
-        var subject = editorStore.addSubject(false);
+      // subjects: payload.subjects.map(function(text) {
+      //   var subject = editorStore.addSubject(false);
 
-        subject.text = text;
+      //   subject.text = text;
 
-        return subject;
-      }),
+      //   return subject;
+      // }),
 
       flags: payload.flags
     });
 
-    exports.submit(payload.dialect);
+    setTimeout(function() {
+      exports.submit(payload.dialect);
+    }, 1250);
   }, appStore.setError.bind(appStore));
 };

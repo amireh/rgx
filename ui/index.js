@@ -2,6 +2,7 @@ var React = require('react');
 var Router = require('react-router');
 var AppStore = require('AppStore');
 var Root = require('./views/Root');
+var Overlays = require('./views/Overlays');
 var Actions = require('Actions');
 
 require('./config/codemirror');
@@ -34,5 +35,6 @@ var router = Router.create({
 
 router.run(function(Handler, state) {
   Actions.clearTransientState();
+  React.render(<Overlays {...state} />, document.querySelector('#__overlays__'));
   React.render(<Handler {...state} />, document.querySelector("#__app__"));
 });

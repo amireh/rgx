@@ -49,7 +49,7 @@ var EditorView = React.createClass({
               Your pattern can now be permanently viewed by visiting
               {' '}
               <Link
-                to="permalink"
+                to="editor"
                 target="_blank"
                 params={{ dialect: permalink.dialect, permalink: permalink.id }}
               >

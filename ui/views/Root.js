@@ -32,7 +32,10 @@ var Root = React.createClass({
   render() {
     return (
       <div className="app-container">
-        <Banner dialect={this.props.params.dialect} />
+        <Banner
+          dialect={this.props.params.dialect}
+          query={this.props.query}
+        />
 
         <ErrorNotifier
           error={appStore.getLatestError()}

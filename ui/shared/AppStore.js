@@ -2,6 +2,7 @@ var Store = require('Store');
 var { AVAILABLE_DIALECTS } = require('getConfig')();
 
 var flagFiles = require.context("json!dialects/", true, /([^\/]+)\/flags.json$/);
+var cheatSheetFiles = require.context("html!dialects/", true, /([^\/]+)\/cheatsheet.html$/);
 
 var FLAGS = flagFiles.keys().reduce(function(flags, flagFile) {
   var dialectFlags = flagFiles(flagFile);
@@ -12,6 +13,15 @@ var FLAGS = flagFiles.keys().reduce(function(flags, flagFile) {
   });
 
   return flags;
+}, {});
+
+var CHEAT_SHEETS = cheatSheetFiles.keys().reduce(function(cheatSheets, file) {
+  var content = cheatSheetFiles(file);
+  var dialect = file.split('/')[1];
+
+  cheatSheets[dialect] = content;
+
+  return cheatSheets;
 }, {});
 
 class AppStore extends Store {
@@ -28,6 +38,10 @@ class AppStore extends Store {
 
   getAvailableFlags(dialect) {
     return FLAGS[dialect];
+  }
+
+  getCheatSheet(dialect) {
+    return CHEAT_SHEETS[dialect];
   }
 
   getLatestError() {

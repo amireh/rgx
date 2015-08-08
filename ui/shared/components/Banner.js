@@ -1,10 +1,11 @@
-var React = require("react");
-var Icon = require("components/Icon");
-var Button = require("components/Button");
-var DialectPicker = require("components/DialectPicker");
-var { Link } = require("react-router");
-var Popup = require('qjunk/lib/Popup');
-var AppStore = require('AppStore');
+const React = require("react");
+const Icon = require("components/Icon");
+const Button = require("components/Button");
+const DialectPicker = require("components/DialectPicker");
+const { Link } = require("react-router");
+const Popup = require('qjunk/lib/Popup');
+const AppStore = require('AppStore');
+const RouteActions = require('actions/RouteActions');
 
 var BannerItem = React.createClass({
   render() {
@@ -20,7 +21,14 @@ var BannerItem = React.createClass({
 
 var Banner = React.createClass({
   propTypes: {
-    dialect: React.PropTypes.string
+    dialect: React.PropTypes.string,
+    query: React.PropTypes.object
+  },
+
+  getDefaultProps: function() {
+    return {
+      query: {}
+    };
   },
 
   componentDidUpdate: function(prevProps, prevState) {
@@ -55,9 +63,10 @@ var Banner = React.createClass({
             {dialect.length > 0 &&
               <Popup
                 ref="popup"
-                content={React.createFactory(DialectPicker)}
+                content={DialectPicker}
                 activeDialect={dialect}
                 availableDialects={AppStore.getAvailableDialects()}
+                onClick={this.closeDialectPickerPopup}
                 popupOptions={
                   {
                     position: {
@@ -81,7 +90,7 @@ var Banner = React.createClass({
             {dialect.length > 0 &&
               <BannerItem>
                 <Icon className="icon-book" />{' '}
-                <a href="/cheatsheet">Cheatsheet</a>
+                <a href="#" onClick={this.toggleCheatsheet}>Cheatsheet</a>
               </BannerItem>
             }
 
@@ -93,6 +102,20 @@ var Banner = React.createClass({
         </header>
       </div>
     );
+  },
+
+  toggleCheatsheet(e) {
+    e.preventDefault();
+
+    RouteActions.updateQuery({
+      cheatsheet: !!this.props.query.cheatsheet ?
+        undefined :
+        this.props.dialect
+    });
+  },
+
+  closeDialectPickerPopup() {
+    this.refs.popup.close();
   }
 });
 

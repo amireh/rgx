@@ -30,7 +30,7 @@ var DialectPicker = React.createClass({
     });
 
     return (
-      <div key={dialect} onClick={this.setDialect} className={className}>
+      <div key={dialect} onClick={this.props.onClick} className={className}>
         <a href={`#/dialects/${dialect}`}>{dialect}</a>
       </div>
     );
