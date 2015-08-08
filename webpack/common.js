@@ -33,7 +33,7 @@ var baseConfig = {
       {
         test: /(ui|qjunk)\/(.*)\.js$/,
         loader: [
-          'jsx-loader?harmony&insertPragma=React.DOM',
+          'babel-loader',
           'wrap-loader?js',
           'react-hot'
         ].join('!')

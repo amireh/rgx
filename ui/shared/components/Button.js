@@ -27,6 +27,7 @@ var Button = React.createClass({
     return(
       <button
         onClick={this.props.onClick}
+        disabled={this.props.disabled}
         onKeyPress={this.props.onKeyPress}
         title={this.props.title}
         type="button"

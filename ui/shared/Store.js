@@ -23,9 +23,13 @@ class Store {
     return {};
   }
 
-  setState(newState) {
+  setState(newState, done) {
     extend(this.state, newState);
     this.emitChange();
+
+    if (done instanceof Function) {
+      done();
+    }
   }
 
   emitChange() {

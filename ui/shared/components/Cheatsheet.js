@@ -20,18 +20,7 @@ var Cheatsheet = React.createClass({
 
   render: function() {
     return (
-      <div className="overlay cheatsheet">
-        <div className="overlay-controls">
-          <h1>{this.props.dialect} Cheatsheet</h1>
-
-          <button
-            className="btn overlay-controls__closeButton"
-            onClick={this.close}
-          >
-            CLOSE
-          </button>
-        </div>
-
+      <div className="cheatsheet">
         {this.renderCheatSheet()}
       </div>
     );

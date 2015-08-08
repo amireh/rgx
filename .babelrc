@@ -1,0 +1,5 @@
+{
+  "blacklist": ["strict"],
+  "loose": ["es6.classes"],
+  "stage": 1
+}

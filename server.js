@@ -34,7 +34,7 @@ if (config.CAPABILITIES.elasticsearch) {
 
 // Routes:
 require('./lib/API/dialects')(app);
-require('./lib/API/permalink')(app);
+require('./lib/API/registry')(app);
 
 // Internal error handler:
 app.use(function onerror(err, req, res, next) {

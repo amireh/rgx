@@ -3,10 +3,10 @@ var Label = require('components/Label');
 var Button = require('components/Button');
 var CodeTextarea = require('components/CodeTextarea');
 var HTabbedPanel = require('components/HTabbedPanel');
-var Subject = require('./Subject');
-var FlagPicker = require('./FlagPicker');
-var ResultEmblem = require('./ResultEmblem');
-var ActionBar = require('./ActionBar');
+var Subject = require('./Editor/Subject');
+var FlagPicker = require('./Editor/FlagPicker');
+var ResultEmblem = require('./Editor/ResultEmblem');
+var ActionBar = require('./Editor/ActionBar');
 var Actions = require('Actions');
 var EllipsifedText = require('components/EllipsifedText');
 var { findWhere, pluck } = require('lodash');
@@ -23,7 +23,8 @@ var EditorView = React.createClass({
       subjects: [],
       results: [],
       availableFlags: [],
-      activeSubjectId: null
+      activeSubjectId: null,
+      readOnly: false
     };
   },
 
@@ -39,12 +40,12 @@ var EditorView = React.createClass({
       return subjectResult.result.status === K.RC_BADPATTERN;
     });
 
-    var { permalink } = this.props;
+    const { permalink, readOnly } = this.props;
 
     return(
       <div className="editor">
         <form onSubmit={this.consume}>
-          {permalink &&
+          {permalink && !readOnly &&
             <p>
               Your pattern can now be permanently viewed by visiting
               {' '}
@@ -67,6 +68,7 @@ var EditorView = React.createClass({
                 value={this.props.flags}
                 placeholder={availableFlagNames.substr(0,6)}
                 options={{scrollbarStyle: null}}
+                readOnly={readOnly}
               />
             </Label>
 
@@ -75,6 +77,7 @@ var EditorView = React.createClass({
               value={hasInvalidPattern ? this.renderPatternError() : "Pattern"}
             >
               <CodeTextarea
+                readOnly={readOnly}
                 onChange={this.updatePattern}
                 value={this.props.pattern}
                 placeholder="foo(.*)"
@@ -93,12 +96,14 @@ var EditorView = React.createClass({
             {this.props.subjects.map(this.renderSubjectTab)}
 
             <HTabbedPanel.Tab key="controls" tabClassName="editor__subject-controls">
-              <Button
-                className="editor__add-subject-btn"
-                onClick={this.addSubject}
-                children="+"
-                title="Add another subject"
-              />
+              {!readOnly && (
+                <Button
+                  className="editor__add-subject-btn"
+                  onClick={this.addSubject}
+                  children="+"
+                  title="Add another subject"
+                />
+              )}
             </HTabbedPanel.Tab>
 
             <HTabbedPanel.Content>
@@ -110,14 +115,22 @@ var EditorView = React.createClass({
 
           <ActionBar
             dialect={this.props.dialect}
+            permalink={this.props.permalink}
+            canPermalink={!readOnly}
+            canEditExternally={readOnly}
+            canPublish={(
+              !readOnly
+              && this.props.pattern.length > 0
+              && this.props.subjects.filter((s) => s.text.length > 0).length > 0
+            )}
           />
 
-          <FlagPicker
+          {!readOnly && <FlagPicker
             flags={this.props.availableFlags}
             value={this.props.flags}
             onChange={this.toggleFlag}
             dialect={this.props.dialect}
-          />
+          />}
         </form>
       </div>
     );
@@ -133,7 +146,7 @@ var EditorView = React.createClass({
           <EllipsifedText>{subject.text}</EllipsifedText>
         }
 
-        {<ResultEmblem {...result.result} />}
+        <ResultEmblem {...result.result} />
       </Tab>
     );
   },
@@ -152,6 +165,7 @@ var EditorView = React.createClass({
       <div className="editor__subject" key={'subject-'+subject.id}>
         <Label value={"Subject " + subject.position}>
           <Subject
+            readOnly={this.props.readOnly}
             ref="subject"
             onChange={this.updateSubject.bind(null, subject.id)}
             result={result ? result.result : undefined}

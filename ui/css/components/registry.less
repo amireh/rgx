@@ -1,0 +1,45 @@
+@registry-listing-w: 320px;
+
+.registry {
+  // position: relative;
+}
+
+.registry-listing {
+  padding: 1em 0;
+  margin: 0;
+  top: @content-top-offset;
+  margin-top: -@whitespace;
+  position: absolute;
+
+  width: @registry-listing-w;
+  bottom: 0;
+  overflow: auto;
+  padding-right: 1em;
+}
+
+.registry-entry {
+  position: relative;
+  list-style: none;
+  padding: 0.5em 0;
+
+  &__rating {
+    position: absolute;
+    right: 0;
+  }
+}
+
+.schemable({
+  .registry-listing {
+    border-right: 3px solid @base2;
+  }
+
+  .registry-entry:hover, .registry-entry--active {
+    background: @base2;
+  }
+});
+
+
+.registry-inspector {
+  margin-left: @registry-listing-w;
+  padding-left: 1em;
+}

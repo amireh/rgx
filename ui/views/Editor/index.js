@@ -1,16 +1,16 @@
 var React = require("react");
-var EditorView = require('./components/EditorView');
+var EditorView = require('components/Editor');
 var appStore = require('AppStore');
-var editorStore = require('EditorStore');
-var resultStore = require('ResultStore');
+var EditorStore = require('EditorStore');
+var ResultStore = require('ResultStore');
 var Actions = require('Actions');
 
 var Editor = React.createClass({
   displayName: "Editor",
 
   componentDidMount: function() {
-    editorStore.addChangeListener(this.reload);
-    resultStore.addChangeListener(this.reload);
+    EditorStore.addChangeListener(this.reload);
+    ResultStore.addChangeListener(this.reload);
 
     if (this.props.params.permalink) {
       this.consumePermalink();
@@ -24,8 +24,8 @@ var Editor = React.createClass({
   },
 
   componentWillUnmount: function() {
-    resultStore.removeChangeListener(this.reload);
-    editorStore.removeChangeListener(this.reload);
+    ResultStore.removeChangeListener(this.reload);
+    EditorStore.removeChangeListener(this.reload);
   },
 
   render() {
@@ -34,13 +34,14 @@ var Editor = React.createClass({
     return(
       <EditorView
         dialect={dialect}
-        pattern={editorStore.getPattern()}
-        subjects={editorStore.getSubjects()}
-        flags={editorStore.getFlags()}
+        pattern={EditorStore.getPattern()}
+        subjects={EditorStore.getSubjects()}
+        flags={EditorStore.getFlags()}
+        meta={EditorStore.getMeta()}
+        activeSubjectId={EditorStore.getActiveSubjectId()}
         availableFlags={appStore.getAvailableFlags(dialect)}
-        results={resultStore.getAll()}
-        permalink={resultStore.getPermalink()}
-        activeSubjectId={editorStore.getActiveSubjectId()}
+        results={ResultStore.getAll()}
+        permalink={ResultStore.getPermalink()}
       />
     );
   },

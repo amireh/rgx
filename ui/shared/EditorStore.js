@@ -2,6 +2,10 @@ var Store = require('Store');
 var appStore = require('AppStore');
 var subjectUUID = 0;
 
+function generateSubjectUUID() {
+  return `s${++subjectUUID}`;
+}
+
 class EditorStore extends Store {
   getInitialState() {
     return {
@@ -9,7 +13,34 @@ class EditorStore extends Store {
       subjects: [{ id: `s${subjectUUID}`, position: 1, text: '' }],
       flags: '',
       activeSubjectId: null,
+      meta: {}
     };
+  }
+
+  use(c, done) {
+    this.clearState();
+    this.setState({
+      id: c.id,
+      pattern: c.pattern,
+      subjects: c.subjects.map(function(text, i) {
+        return {
+          id: generateSubjectUUID(),
+          position: i,
+          text: text
+        };
+      }),
+      flags: c.flags,
+      meta: {
+        description: c.description,
+        author: c.author,
+        public: c.public,
+        stars: c.stars
+      }
+    }, done);
+  }
+
+  getConstructId() {
+    return this.state.id;
   }
 
   getPattern() {
@@ -24,13 +55,17 @@ class EditorStore extends Store {
     this.setState({ flags: newFlags });
   }
 
+  setMeta(meta) {
+    this.setState({ meta });
+  }
+
   getSubjects() {
     return this.state.subjects;
   }
 
   addSubject(activate) {
     var subject = {
-      id: `s${++subjectUUID}`,
+      id: generateSubjectUUID(),
       position: this.state.subjects.length+1,
       text: ''
     };
@@ -53,6 +88,11 @@ class EditorStore extends Store {
       this.state.subjects.length ? this.state.subjects[0].id : null
     );
   }
+
+  getMeta() {
+    return this.state.meta;
+  }
 }
+
 
 module.exports = new EditorStore();

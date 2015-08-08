@@ -1,7 +1,8 @@
 var appStore = require('AppStore');
+var ConstructStore = require('ConstructStore');
 var editorStore = require('EditorStore');
 var resultStore = require('ResultStore');
-var { findWhere, pluck, debounce } = require('lodash');
+var { findWhere, pluck, debounce, extend } = require('lodash');
 var ajax = require('utils/ajax');
 var { THROTTLE } = require("constants");
 var RouteActions = require('actions/RouteActions');
@@ -110,15 +111,20 @@ exports.clearTransientState = function() {
 };
 
 exports.generatePermalink = function(dialect) {
+  exports.publish(dialect, { public: false });
+};
+
+exports.publish = function(dialect, customParams) {
   var subjects = editorStore.getSubjects();
-  var params = {
+  var params = extend({}, customParams, {
+    dialect: dialect,
     pattern: editorStore.getPattern(),
     subjects: pluck(subjects, 'text'),
     flags: editorStore.getFlags()
-  };
+  });
 
   ajax({
-    url: `/dialects/${dialect}/permalink`,
+    url: '/registry',
     type: 'POST',
     data: JSON.stringify(params),
     headers: { 'Content-Type': 'application/json; charset=utf-8' },
@@ -133,23 +139,19 @@ exports.generatePermalink = function(dialect) {
 };
 
 exports.retrievePermalink = function(permalink) {
-  ajax({ url: `/permalinks/${permalink}` }, function(payload) {
+  ajax({ url: `/registry/${permalink}` }, function(payload) {
     editorStore.clearState();
-    editorStore.setState({
-      pattern: payload.pattern,
-      // subjects: payload.subjects.map(function(text) {
-      //   var subject = editorStore.addSubject(false);
+    editorStore.use(payload);
+    exports.submit(payload.dialect);
+  }, appStore.setError.bind(appStore));
+};
 
-      //   subject.text = text;
-
-      //   return subject;
-      // }),
-
-      flags: payload.flags
-    });
-
-    setTimeout(function() {
-      exports.submit(payload.dialect);
-    }, 1250);
+exports.vote = function(docId, upOrDown) {
+  ajax({
+    url: `/registry/${docId}/${upOrDown ? 'upvote' : 'downvote'}`,
+    type: 'PATCH'
+  }, function(newDoc) {
+    console.log(docId, `was ${upOrDown ? 'up voted' : 'down voted'}`, 'down to', newDoc.stars);
+    ConstructStore.update(docId, newDoc);
   }, appStore.setError.bind(appStore));
 };

@@ -1,6 +1,7 @@
 var React = require('react');
 var CodeMirror = require('codemirror');
 var { string, func, object } = React.PropTypes;
+const { extend } = require('lodash');
 
 var CodeTextarea = React.createClass({
   displayName: 'CodeTextarea',
@@ -14,10 +15,9 @@ var CodeTextarea = React.createClass({
   },
 
   componentDidMount: function() {
-    this.cm = CodeMirror.fromTextArea(
-      this.refs.inputWidget.getDOMNode(),
-      this.props.options
-    );
+    const options = extend({ readOnly: this.props.readOnly }, this.props.options);
+
+    this.cm = CodeMirror.fromTextArea(this.refs.inputWidget.getDOMNode(), options);
 
     this.cm.on('change', () => {
       if (!this.cm.isClean() && this.cm.getValue() !== this.props.value) {

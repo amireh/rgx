@@ -24,6 +24,7 @@ var HighlightedInput = React.createClass({
 
   componentDidMount: function() {
     this.cm = CodeMirror.fromTextArea(this.refs.inputWidget.getDOMNode(), {
+      readOnly: this.props.readOnly
     });
 
     this.cm.on('change', () => {

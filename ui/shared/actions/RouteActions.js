@@ -34,6 +34,10 @@ exports.replaceWith = function(to, params) {
   delegate.replaceWith(to, params);
 };
 
+exports.transitionTo = function(to, params) {
+  delegate.transitionTo(to, params);
+};
+
 exports.assignDelegate = function(inDelegate) {
   delegate = inDelegate;
 };

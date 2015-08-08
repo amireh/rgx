@@ -25,6 +25,12 @@ var router = Router.create({
         handler={require("./views/Editor")}
       />
 
+      <Route
+        name="registry"
+        path="/browse/?:id?"
+        handler={require("./views/Registry")}
+      />
+
       <NotFoundRoute
         name="not-found"
         handler={require('./views/NotFound')}

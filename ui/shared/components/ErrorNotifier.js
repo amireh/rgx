@@ -17,8 +17,6 @@ var ErrorNotifier = React.createClass({
       <div className="error-notifier">
         {internalError && this.renderInternalError(internalError)}
         {error && this.renderError(error)}
-
-
       </div>
     );
   },

@@ -96,7 +96,7 @@ var Banner = React.createClass({
 
             <BannerItem>
               <Icon className="icon-cube" />{' '}
-              <a href="/browse">Browse</a>
+              <Link to="registry">Browse</Link>
             </BannerItem>
           </nav>
         </header>
