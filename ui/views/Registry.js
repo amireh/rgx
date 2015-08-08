@@ -13,12 +13,6 @@ const classSet = require('utils/classSet');
 const { sortByAll } = require('lodash');
 
 const Registry = React.createClass({
-  // getInitialState: function() {
-  //   return {
-  //     loading: true
-  //   };
-  // },
-
   getDefaultProps: function() {
     return {
       params: {}
@@ -54,7 +48,7 @@ const Registry = React.createClass({
 
   render: function() {
     const inspectedId = this.props.params.id;
-    const constructs = ConstructStore.getAll();
+    const constructs = sortByAll(ConstructStore.getAll(), ['stars', 'id']).reverse();
 
     return (
       <div className="registry">

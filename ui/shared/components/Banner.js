@@ -60,7 +60,7 @@ var Banner = React.createClass({
           </p>
 
           <nav className="banner__navigation">
-            {dialect.length > 0 &&
+            {true &&
               <Popup
                 ref="popup"
                 content={DialectPicker}
@@ -82,7 +82,7 @@ var Banner = React.createClass({
                 <BannerItem>
                   <Icon className="icon-arrow-down" />
                   {' '}
-                  <a>{dialect}</a>
+                  <a>{dialect || 'Choose a Dialect'}</a>
                 </BannerItem>
               </Popup>
             }

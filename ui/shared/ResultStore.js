@@ -15,6 +15,10 @@ class ResultStore extends Store {
   getPermalink() {
     return this.state.permalink;
   }
+
+  getPublishedConstruct() {
+    return this.state.publishedConstruct;
+  }
 }
 
 module.exports = new ResultStore();

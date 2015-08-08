@@ -1,6 +1,6 @@
 const Store = require('Store');
 const ajax = require('utils/ajax');
-const { findWhere, sortByAll } = require('lodash');
+const { findWhere } = require('lodash');
 
 class ConstructStore extends Store {
   getInitialState() {
@@ -14,10 +14,8 @@ class ConstructStore extends Store {
       url: '/registry',
       data: JSON.stringify({ page: 0 }),
       headers: { 'Content-Type': 'application/json; charset=utf-8' },
-    }, (payload) => {
-      this.setState({
-        constructs: sortByAll(payload, ['stars', 'id']).reverse()
-      });
+    }, (constructs) => {
+      this.setState({ constructs });
     });
   }
 

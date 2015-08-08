@@ -4,6 +4,7 @@ var appStore = require('AppStore');
 var EditorStore = require('EditorStore');
 var ResultStore = require('ResultStore');
 var Actions = require('Actions');
+var { Link } = require('react-router');
 
 var Editor = React.createClass({
   displayName: "Editor",
@@ -29,20 +30,65 @@ var Editor = React.createClass({
   },
 
   render() {
-    var dialect = this.getDialect();
+    const dialect = this.getDialect();
+    const generatedPermalink = ResultStore.getPermalink();
+    const publishedConstruct = ResultStore.getPublishedConstruct();
 
     return(
-      <EditorView
-        dialect={dialect}
-        pattern={EditorStore.getPattern()}
-        subjects={EditorStore.getSubjects()}
-        flags={EditorStore.getFlags()}
-        meta={EditorStore.getMeta()}
-        activeSubjectId={EditorStore.getActiveSubjectId()}
-        availableFlags={appStore.getAvailableFlags(dialect)}
-        results={ResultStore.getAll()}
-        permalink={ResultStore.getPermalink()}
-      />
+      <div>
+        {generatedPermalink && (
+          <p>
+            Your pattern can now be permanently viewed by visiting
+            {' '}
+            <Link
+              to="editor"
+              target="_blank"
+              params={{
+                dialect: generatedPermalink.dialect,
+                permalink: generatedPermalink.href
+              }}
+            >
+              this link
+            </Link>
+            .
+            {' '}
+
+            <em><a onClick={Actions.clearGenerationResults}>Dismiss</a></em>
+          </p>
+        )}
+
+        {publishedConstruct && (
+          <p>
+            Your pattern has been published to the registry. You can view it
+            {' '}
+            <Link
+              to="registry"
+              target="_blank"
+              params={{
+                id: publishedConstruct.id
+              }}
+            >
+              here
+            </Link>.
+
+            {' '}
+
+            <em><a onClick={Actions.clearGenerationResults}>Dismiss</a></em>
+          </p>
+        )}
+
+        <EditorView
+          dialect={dialect}
+          pattern={EditorStore.getPattern()}
+          subjects={EditorStore.getSubjects()}
+          flags={EditorStore.getFlags()}
+          meta={EditorStore.getMeta()}
+          activeSubjectId={EditorStore.getActiveSubjectId()}
+          availableFlags={appStore.getAvailableFlags(dialect)}
+          results={ResultStore.getAll()}
+          permalink={generatedPermalink}
+        />
+      </div>
     );
   },
 

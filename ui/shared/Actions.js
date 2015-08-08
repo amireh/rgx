@@ -110,11 +110,14 @@ exports.clearTransientState = function() {
   exports.dismissInternalError();
 };
 
-exports.generatePermalink = function(dialect) {
-  exports.publish(dialect, { public: false });
+exports.clearGenerationResults = function() {
+  resultStore.setState({
+    permalink: undefined,
+    publishedConstruct: undefined
+  });
 };
 
-exports.publish = function(dialect, customParams) {
+function saveConstruct(dialect, customParams, done) {
   var subjects = editorStore.getSubjects();
   var params = extend({}, customParams, {
     dialect: dialect,
@@ -128,14 +131,25 @@ exports.publish = function(dialect, customParams) {
     type: 'POST',
     data: JSON.stringify(params),
     headers: { 'Content-Type': 'application/json; charset=utf-8' },
-  }, function(payload) {
+  }, done, appStore.setError.bind(appStore));
+};
+
+exports.generatePermalink = function(dialect) {
+  saveConstruct(dialect, { public: false }, function(payload) {
     resultStore.setState({
-      permalink: {
-        dialect: dialect,
-        id: payload.href
-      }
+      permalink: payload
     });
-  }, appStore.setError.bind(appStore));
+  });
+};
+
+exports.publish = function(dialect, customParams, done) {
+  saveConstruct(dialect, customParams, function(doc) {
+    resultStore.setState({
+      publishedConstruct: doc
+    });
+
+    done();
+  });
 };
 
 exports.retrievePermalink = function(permalink) {

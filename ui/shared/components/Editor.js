@@ -11,7 +11,6 @@ var Actions = require('Actions');
 var EllipsifedText = require('components/EllipsifedText');
 var { findWhere, pluck } = require('lodash');
 var K = require('constants');
-var { Link } = require('react-router');
 
 var EditorView = React.createClass({
   displayName: "EditorView",
@@ -41,24 +40,14 @@ var EditorView = React.createClass({
     });
 
     const { permalink, readOnly } = this.props;
+    const hasContent = (
+      this.props.pattern.length > 0
+      && this.props.subjects.filter((s) => s.text.length > 0).length > 0
+    );
 
     return(
       <div className="editor">
         <form onSubmit={this.consume}>
-          {permalink && !readOnly &&
-            <p>
-              Your pattern can now be permanently viewed by visiting
-              {' '}
-              <Link
-                to="editor"
-                target="_blank"
-                params={{ dialect: permalink.dialect, permalink: permalink.id }}
-              >
-                this link
-              </Link>
-              .
-            </p>
-          }
 
           <div className="editor__pattern-and-flags">
             <Label className="flags-input-container" value="Flags">
@@ -116,13 +105,9 @@ var EditorView = React.createClass({
           <ActionBar
             dialect={this.props.dialect}
             permalink={this.props.permalink}
-            canPermalink={!readOnly}
             canEditExternally={readOnly}
-            canPublish={(
-              !readOnly
-              && this.props.pattern.length > 0
-              && this.props.subjects.filter((s) => s.text.length > 0).length > 0
-            )}
+            canPermalink={!readOnly && hasContent}
+            canPublish={!readOnly && hasContent}
           />
 
           {!readOnly && <FlagPicker

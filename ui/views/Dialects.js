@@ -11,6 +11,7 @@ var Dialects = React.createClass({
         <h2>Choose a Dialect</h2>
 
         <DialectPicker
+          listMode
           availableDialects={appStore.getAvailableDialects()}
         />
       </div>

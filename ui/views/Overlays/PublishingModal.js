@@ -96,7 +96,7 @@ const PublishingModal = React.createClass({
         author: author,
         description: description,
         public: true
-      });
+      }, this.props.onClose);
     }
     else {
       this.setState({ errors });

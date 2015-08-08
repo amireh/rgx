@@ -16,8 +16,13 @@ var DialectPicker = React.createClass({
   },
 
   render() {
+    const className = classSet({
+      'dialect-picker': true,
+      'dialect-picker--list': this.props.listMode
+    });
+
     return(
-      <div className="dialect-picker">
+      <div className={className}>
         {this.props.availableDialects.map(this.renderDialect)}
       </div>
     );

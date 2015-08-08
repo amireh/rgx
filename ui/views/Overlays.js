@@ -35,7 +35,10 @@ const Overlays = React.createClass({
 
         {this.props.query.publishing &&
           <Overlay onClose={this.dismissPublishingModal} title="Publish Construct">
-            <PublishingModal dialect={this.props.params.dialect} />
+            <PublishingModal
+              onClose={this.dismissPublishingModal}
+              dialect={this.props.params.dialect}
+            />
           </Overlay>
         }
       </div>
