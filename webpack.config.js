@@ -13,7 +13,17 @@ var config = {
       "process.env.APP_ROOT": path.resolve(__dirname)
     })
   ],
-  entry: { index: [ "./ui/index.js" ] },
+  entry: {
+    index: [ "./ui/index.js" ],
+    vendor: [
+      'react',
+      'react-router',
+      'codemirror',
+      'lodash',
+      'jquery',
+      'qjunk'
+    ]
+  },
 
   output: {
     path: path.resolve(__dirname, "www"),
@@ -33,9 +43,13 @@ if (process.env.NODE_ENV === "development") {
   config.entry.index.unshift("webpack/hot/only-dev-server");
   config.entry.index.unshift('webpack-dev-server/client?' + devServerPath);
   config.plugins.push(new webpack.HotModuleReplacementPlugin());
+
+  config.module.loaders.filter(function(loader) {
+    return loader.type === 'js';
+  })[0].loader += '!react-hot';
 }
 
-if (nodeEnv === 'production') {
+if (nodeEnv === 'production' && process.env.OPTIMIZE !== '0') {
   config.plugins.push(new webpack.optimize.UglifyJsPlugin());
 }
 

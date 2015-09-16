@@ -1,7 +1,7 @@
-exports.HOST = '192.168.1.6';
-exports.PORT = 8952;
-exports.WEBPACK_DEVSERVER_HOST = '192.168.1.6';
-exports.WEBPACK_DEVSERVER_PORT = 8953;
+exports.HOST = process.env.HOST || '0.0.0.0';
+exports.PORT = process.env.PORT || 8952;
+exports.WEBPACK_DEVSERVER_HOST = process.env.HOST || '0.0.0.0';
+exports.WEBPACK_DEVSERVER_PORT = process.env.WEBPACK_PORT || 8953;
 exports.DIALECTS_DIR = 'dialects';
 exports.SIGNAL_READY = 'ready';
 
@@ -14,8 +14,8 @@ exports.DIALECT_BINMAP = {
 
 exports.CAPABILITIES = {
   'elasticsearch': {
-    host: 'localhost',
-    port: '9200'
+    host: process.env.ELASTIC_SEARCH_HOST || 'localhost',
+    port: process.env.ELASTIC_SEARCH_PORT || '9200'
   }
 };
 
