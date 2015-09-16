@@ -17,7 +17,7 @@ var router = Router.create({
     <Route name="root" path="/" handler={Root}>
       <DefaultRoute
         name="dialects"
-        handler={require("./views/Dialects")}
+        handler={require("./views/Landing")}
       />
 
       <Route

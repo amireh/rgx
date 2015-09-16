@@ -11,6 +11,7 @@ exports.KC_RETURN = 13;
 exports.THROTTLE = 180;
 exports.AVAILABLE_SCHEMES = [
   'plain',
+  'steel',
   'solarized--light',
   'solarized--dark'
 ];

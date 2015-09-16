@@ -64,9 +64,7 @@ const PublishingModal = React.createClass({
 
           <div className="form-label__widget">
             <textarea
-              autoFocus
               className="form-input"
-              type="text"
               placeholder="A more detailed explanation of this construct"
               ref="c_description"
             />

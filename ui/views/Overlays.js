@@ -22,27 +22,29 @@ const Overlays = React.createClass({
   },
 
   render: function() {
-    return (
-      <div>
-        {this.props.query.cheatsheet &&
-          <Overlay
-            onClose={this.dismissCheatsheet}
-            title={`${this.props.query.cheatsheet} Cheatsheet`}
-          >
-            <Cheatsheet dialect={this.props.query.cheatsheet} />
-          </Overlay>
-        }
-
-        {this.props.query.publishing &&
-          <Overlay onClose={this.dismissPublishingModal} title="Publish Construct">
-            <PublishingModal
-              onClose={this.dismissPublishingModal}
-              dialect={this.props.params.dialect}
-            />
-          </Overlay>
-        }
-      </div>
-    );
+    if (this.props.query.publishing) {
+      return (
+        <Overlay onClose={this.dismissPublishingModal} title="Publish Construct">
+          <PublishingModal
+            onClose={this.dismissPublishingModal}
+            dialect={this.props.params.dialect}
+          />
+        </Overlay>
+      );
+    }
+    else if (this.props.query.cheatsheet ) {
+      return (
+        <Overlay
+          onClose={this.dismissCheatsheet}
+          title={`${this.props.query.cheatsheet} Cheatsheet`}
+        >
+          <Cheatsheet dialect={this.props.query.cheatsheet} />
+        </Overlay>
+      );
+    }
+    else {
+      return null;
+    }
   },
 
   hasOverlay() {
