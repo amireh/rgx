@@ -9,8 +9,9 @@ exports.RC_NOMATCH = 'RC_NOMATCH';
 exports.RC_BADPATTERN = 'RC_BADPATTERN';
 exports.KC_RETURN = 13;
 exports.THROTTLE = 180;
-exports.AVAILABILE_SCHEMES = [
+exports.AVAILABLE_SCHEMES = [
+  'plain',
   'solarized--light',
   'solarized--dark'
 ];
-exports.DEFAULT_SCHEME = 'solarized--light';
+exports.DEFAULT_SCHEME = 'plain';

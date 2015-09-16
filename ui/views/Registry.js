@@ -11,6 +11,7 @@ const RouteActions = require('actions/RouteActions');
 const Actions = require('Actions');
 const classSet = require('utils/classSet');
 const { sortByAll } = require('lodash');
+const $ = require('jquery');
 
 const Registry = React.createClass({
   getDefaultProps: function() {
@@ -21,6 +22,7 @@ const Registry = React.createClass({
 
   componentWillMount: function() {
     ConstructStore.fetch();
+    $(document.body).addClass('body--with-registry');
   },
 
   componentDidMount: function() {
@@ -41,6 +43,8 @@ const Registry = React.createClass({
   },
 
   componentWillUnmount: function() {
+    $(document.body).removeClass('body--with-registry');
+
     ResultStore.removeChangeListener(this.reload);
     EditorStore.removeChangeListener(this.reload);
     ConstructStore.removeChangeListener(this.reload);
@@ -109,13 +113,20 @@ const Registry = React.createClass({
 
     return (
       <div>
-        <h1>{c.title}</h1>
+        <h1>{c.title || 'Untitled'}</h1>
 
         {c.description.length > 0 && (
           <p>{c.description}</p>
         )}
 
-        <p className="type-small">-By <strong>{c.author}</strong></p>
+        <ul className="registry__meta">
+          <li>
+            Author: {c.author}
+          </li>
+          <li>
+            Dialect: {c.dialect}
+          </li>
+        </ul>
 
         <Editor
           readOnly
@@ -128,6 +139,8 @@ const Registry = React.createClass({
           availableFlags={appStore.getAvailableFlags(c.dialect)}
           results={ResultStore.getAll()}
           permalink={c.href}
+          showPublish={false}
+          showPermalink={false}
         />
       </div>
     );

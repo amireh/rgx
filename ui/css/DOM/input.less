@@ -1,3 +1,21 @@
+.form-input {
+  display: block;
+  line-height: 2em;
+  padding: 0.5em;
+  font-family: inherit;
+  border-style: solid;
+  border-width: 1px;
+  margin: @whitespace 0;
+  width: 100%;
+}
+
+.schemable({
+  .form-input {
+    border-color: @border-color;
+    color: inherit;
+    background: transparent;
+  }
+});
 
 input[type="checkbox"] {
   vertical-align: middle;

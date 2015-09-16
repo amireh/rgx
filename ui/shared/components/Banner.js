@@ -90,7 +90,13 @@ var Banner = React.createClass({
             {dialect.length > 0 &&
               <BannerItem>
                 <Icon className="icon-book" />{' '}
-                <a href="#" onClick={this.toggleCheatsheet}>Cheatsheet</a>
+                <a
+                  href="#"
+                  onClick={this.toggleCheatsheet}
+                  className={this.props.query.cheatsheet ? 'active' : undefined}
+                >
+                  Cheatsheet
+                </a>
               </BannerItem>
             }
 

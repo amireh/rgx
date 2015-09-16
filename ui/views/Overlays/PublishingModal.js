@@ -30,12 +30,13 @@ const PublishingModal = React.createClass({
 
         <label className="form-label">
           <span className="form-label__caption">
-            Description
+            Title
           </span>
 
-          {errors.description && (
+          {errors.title && (
             <p className="form-label__error">
-              Please provide a brief description.
+              Please provide a brief title that describes what this construct
+              is for.
             </p>
           )}
 
@@ -45,6 +46,28 @@ const PublishingModal = React.createClass({
               className="form-input"
               type="text"
               placeholder="A brief description of this construct"
+              ref="c_title"
+            />
+          </div>
+        </label>
+
+        <label className="form-label">
+          <span className="form-label__caption">
+            Description <em className="type-mute">(Optional)</em>
+          </span>
+
+          {errors.description && (
+            <p className="form-label__error">
+              Description can not exceed more than 256 characters.
+            </p>
+          )}
+
+          <div className="form-label__widget">
+            <textarea
+              autoFocus
+              className="form-input"
+              type="text"
+              placeholder="A more detailed explanation of this construct"
               ref="c_description"
             />
           </div>
@@ -76,12 +99,17 @@ const PublishingModal = React.createClass({
   },
 
   save() {
+    const title = this.refs.c_title.getDOMNode().value;
     const description = this.refs.c_description.getDOMNode().value;
     const author = this.refs.c_author.getDOMNode().value;
 
     let errors = {};
 
-    if (description.length <= 3) {
+    if (title.length <= 3) {
+      errors['title'] = true;
+    }
+
+    if (description && description.length >= 256) {
       errors['description'] = true;
     }
 
@@ -94,6 +122,7 @@ const PublishingModal = React.createClass({
 
       Actions.publish(this.props.dialect, {
         author: author,
+        title: title,
         description: description,
         public: true
       }, this.props.onClose);

@@ -1,44 +1,12 @@
-body.body--overlain {
-  .qtip {
-    z-index: -1 !important;
-  }
-
-  &:after {
-    display: block;
-    content: '';
-    background: rgba(0,0,0,0.5);
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 3;
-    pointer-events: none;
-  }
-
-  #__app__ {
-    -webkit-filter: blur(3px);
-    -moz-filter: blur(3px);
-    -o-filter: blur(3px);
-    -ms-filter: blur(3px);
-    filter: blur(3px);
-  }
-}
-
-
 .overlay {
-  @width: 640px;
-
   position: fixed;
-  width: @width;
-  max-height: 80%;
-  left: 50%;
-  top: 10%;
-  margin-left: -@width/2;
-  opacity: 0.95;
-  z-index: 4;
+  width: 50%;
+  max-width: @content-max-width / 2;
+  top: @content-top-offset;
+  bottom: 0;
   overflow: auto;
-  padding: 1em 2em;
+  padding: 0 2em;
+  font-size: 0.9em;
 
   &__controls {
     position: relative;
@@ -53,13 +21,11 @@ body.body--overlain {
 
 .schemable({
   .overlay {
-    background: @base2;
-    border: 1px solid @base1;
-    box-shadow: 0 0 0 3px @base3;
+    border-left: 1px solid @border-color;
   }
 
   .overlay__controls {
-    border-bottom: 1px solid @base0;
+    border-bottom: 1px solid @border-color;
     margin-bottom: 1em;
   }
 });

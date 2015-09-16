@@ -1,10 +1,10 @@
-var React = require("react");
-var Button = require("components/Button");
-var Icon = require("components/Icon");
-var $ = require('jquery');
-var { AVAILABLE_SCHEMES, DEFAULT_SCHEME } = require("constants");
+const React = require("react");
+const Button = require("components/Button");
+const Icon = require("components/Icon");
+const $ = require('jquery');
+const { AVAILABLE_SCHEMES, DEFAULT_SCHEME } = require("constants");
 
-var ColorSchemeSwitcher = React.createClass({
+const ColorSchemeSwitcher = React.createClass({
   componentDidMount: function() {
     $(document.body).addClass(DEFAULT_SCHEME);
   },
@@ -22,13 +22,22 @@ var ColorSchemeSwitcher = React.createClass({
   },
 
   switchScheme: function() {
-    var className = document.body.className;
+    let className = document.body.className;
+    let currScheme, nextScheme;
 
-    if (className.indexOf("solarized--light") > -1) {
-      className = className.replace("solarized--light", "solarized--dark");
+    AVAILABLE_SCHEMES.some(function(scheme, i) {
+      if (className.indexOf(scheme) > -1) {
+        currScheme = scheme;
+        nextScheme = nextScheme || AVAILABLE_SCHEMES[i+1] || AVAILABLE_SCHEMES[0];
+        return true;
+      }
+    });
+
+    if (currScheme && nextScheme) {
+      className = className.replace(currScheme, nextScheme);
     }
     else {
-      className = className.replace("solarized--dark", "solarized--light");
+      className = DEFAULT_SCHEME;
     }
 
     document.body.className = className;

@@ -9,6 +9,10 @@
   transition: background 0.08s ease-out 0s;
 }
 
+a.btn {
+  text-decoration: none;
+}
+
 .schemable({
   .btn {
     background: @base2;
@@ -37,7 +41,10 @@
     }
 
     &:disabled {
-      background: darken(@base2, 5%);
+      // background: darken(@base3, 5%);
+      color: fade(@base1, 50%);
+      // background: darken(@base3, 10%);
+      box-shadow: none;
     }
 
     &--bordered {

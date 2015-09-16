@@ -1,16 +1,11 @@
-@registry-listing-w: 320px;
-
-.registry {
-  // position: relative;
-}
+@registry-listing-w: 26em;
 
 .registry-listing {
   padding: 1em 0;
   margin: 0;
   top: @content-top-offset;
-  margin-top: -@whitespace;
-  position: absolute;
-
+  position: fixed;
+  margin-left: -1 * @registry-listing-w - 2em;
   width: @registry-listing-w;
   bottom: 0;
   overflow: auto;
@@ -21,6 +16,7 @@
   position: relative;
   list-style: none;
   padding: 0.5em 0;
+  cursor: pointer;
 
   &__rating {
     position: absolute;
@@ -38,8 +34,9 @@
   }
 });
 
-
-.registry-inspector {
-  margin-left: @registry-listing-w;
-  padding-left: 1em;
+.body--with-registry {
+  .root__content {
+    margin-left: @registry-listing-w;
+    padding-left: 2em;
+  }
 }

@@ -32,7 +32,7 @@ var Cheatsheet = React.createClass({
 
     if (!cheatSheet) {
       return (
-        <div>
+        <div key="prompt">
           <p>
             It appears we do not have a specific cheat sheet for {dialect},
             would you like to view the generic regex (PCRE) cheatsheet instead?
@@ -51,7 +51,7 @@ var Cheatsheet = React.createClass({
     }
     else {
       return (
-        <div dangerouslySetInnerHTML={{__html: cheatSheet }} />
+        <div key="sheet" dangerouslySetInnerHTML={{__html: cheatSheet }} />
       );
     }
   },

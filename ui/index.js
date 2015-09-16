@@ -2,7 +2,6 @@ var React = require('react');
 var Router = require('react-router');
 var AppStore = require('AppStore');
 var Root = require('./views/Root');
-var Overlays = require('./views/Overlays');
 var Actions = require('Actions');
 var $ = require('jquery');
 var SPLASH_HIDE_DURATION = 500;
@@ -52,6 +51,5 @@ router.run(function(Handler, state) {
     $splash.remove();
   }, SPLASH_HIDE_DURATION);
 
-  React.render(<Overlays {...state} />, document.querySelector('#__overlays__'));
   React.render(<Handler {...state} />, document.querySelector("#__app__"));
 });

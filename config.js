@@ -1,6 +1,6 @@
-exports.HOST = '0.0.0.0';
+exports.HOST = '192.168.1.6';
 exports.PORT = 8952;
-exports.WEBPACK_DEVSERVER_HOST = '0.0.0.0';
+exports.WEBPACK_DEVSERVER_HOST = '192.168.1.6';
 exports.WEBPACK_DEVSERVER_PORT = 8953;
 exports.DIALECTS_DIR = 'dialects';
 exports.SIGNAL_READY = 'ready';

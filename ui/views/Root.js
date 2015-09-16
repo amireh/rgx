@@ -6,6 +6,7 @@ var ColorSchemeSwitcher = require("components/ColorSchemeSwitcher");
 var ErrorNotifier = require("components/ErrorNotifier");
 var Banner = require('components/Banner');
 var appStore = require('AppStore');
+var Overlays = require('./Overlays');
 
 var { RouteHandler } = Router;
 
@@ -31,22 +32,28 @@ var Root = React.createClass({
 
   render() {
     return (
-      <div className="app-container">
+      <div className="root">
         <Banner
           dialect={this.props.params.dialect}
           query={this.props.query}
         />
 
-        <ErrorNotifier
-          error={appStore.getLatestError()}
-          internalError={appStore.getLatestInternalError()}
-        />
+        <div className="root__content">
+          <ErrorNotifier
+            error={appStore.getLatestError()}
+            internalError={appStore.getLatestInternalError()}
+          />
 
-        <RouteHandler
-          onChange={this.reload}
-          config={getConfig()}
-          {...this.props}
-        />
+          <RouteHandler
+            onChange={this.reload}
+            config={getConfig()}
+            {...this.props}
+          />
+        </div>
+
+        <div className="root__overlays">
+          <Overlays {...this.props} />
+        </div>
 
         <ColorSchemeSwitcher />
       </div>

@@ -1,6 +1,22 @@
-
-.app-container {
+.root {
   width: @content-width;
+  max-width: @content-max-width;
   margin: 0 auto;
-  margin-top: @content-top-offset;
+  margin-top: @content-top-offset + @whitespace;
+
+  &__content {
+  }
+
+  &__overlays {
+    position: absolute;
+    right: 0;
+    left: 50%;
+  }
+
+  .body--overlain & {
+    &__content {
+      padding-right: 2em;
+      margin-right: 50%;
+    }
+  }
 }

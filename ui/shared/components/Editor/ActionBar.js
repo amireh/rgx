@@ -11,7 +11,7 @@ const ActionBar = React.createClass({
   render() {
     return(
       <div className="editor-actionbar">
-        {(
+        {this.props.showPermalink && (
           <Button
             disabled={!this.props.canPermalink}
             onClick={this.generatePermalink}
@@ -25,7 +25,7 @@ const ActionBar = React.createClass({
 
         {' '}
 
-        {(
+        {this.props.showPublish && (
           <Button
             disabled={!this.props.canPublish}
             onClick={this.publish}

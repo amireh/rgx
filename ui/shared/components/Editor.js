@@ -23,12 +23,14 @@ var EditorView = React.createClass({
       results: [],
       availableFlags: [],
       activeSubjectId: null,
-      readOnly: false
+      readOnly: false,
+      showPermalink: true,
+      showPublish: true,
     };
   },
 
   componentDidUpdate: function(prevProps, prevState) {
-    if (this.props.activeSubjectId !== prevProps.activeSubjectId) {
+    if (this.props.activeSubjectId !== prevProps.activeSubjectId && !this.props.readOnly) {
       this.refs.subject.focus();
     }
   },
@@ -55,7 +57,7 @@ var EditorView = React.createClass({
                 className=""
                 onChange={this.updateFlags}
                 value={this.props.flags}
-                placeholder={availableFlagNames.substr(0,6)}
+                placeholder={availableFlagNames.substr(0,5)}
                 options={{scrollbarStyle: null}}
                 readOnly={readOnly}
               />
@@ -106,7 +108,9 @@ var EditorView = React.createClass({
             dialect={this.props.dialect}
             permalink={this.props.permalink}
             canEditExternally={readOnly}
+            showPermalink={this.props.showPermalink}
             canPermalink={!readOnly && hasContent}
+            showPublish={this.props.showPublish}
             canPublish={!readOnly && hasContent}
           />
 
