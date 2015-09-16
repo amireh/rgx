@@ -57,7 +57,7 @@ class AppStore extends Store {
       case 400:
       case 422:
         this.setState({ error: error.message });
-      break;
+        break;
 
       default:
         this.setState({ internalError: error.message });

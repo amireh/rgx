@@ -4,9 +4,7 @@ var classSet = require("react/lib/cx");
 var RouteActions = require("actions/RouteActions");
 var { TAB_LISTING, TAB_SOURCE, QUERY_OFF } = require("constants");
 var DEFAULT_TAB = TAB_LISTING;
-var { Link } = Router;
 
-var activeTab;
 var Tab = React.createClass({
   render() {
     var className = classSet({
@@ -34,7 +32,6 @@ var Tabs = React.createClass({
   mixins: [ Router.State ],
 
   render() {
-    activeTab = this.getQuery().tab || DEFAULT_TAB;
     var pathName = this.getPathname();
 
     return(

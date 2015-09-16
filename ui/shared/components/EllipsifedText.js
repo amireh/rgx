@@ -15,7 +15,7 @@ var EllipsifedText = React.createClass({
     this.adjustSize();
   },
 
-  componentDidUpdate: function(prevProps, prevState) {
+  componentDidUpdate: function() {
     this.adjustSize();
   },
 
@@ -35,7 +35,6 @@ var EllipsifedText = React.createClass({
     var node = this.refs.node.getDOMNode();
     var parentNode = node.parentNode;
 
-    var padding       = parseInt(getStyle(parentNode, 'padding'), 10);
     var paddingLeft   = parseInt(getStyle(parentNode, 'padding-left'), 10);
     var paddingRight  = parseInt(getStyle(parentNode, 'padding-right'), 10);
     var targetWidth = (

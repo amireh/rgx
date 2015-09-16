@@ -35,7 +35,7 @@ def match(pattern, subject, flags)
   rescue Exception => e
     return {
       status: RC_BADPATTERN,
-      error: e.message
+      message: e.message
     }
   end
 

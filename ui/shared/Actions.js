@@ -5,7 +5,6 @@ var resultStore = require('ResultStore');
 var { findWhere, pluck, debounce, extend } = require('lodash');
 var ajax = require('utils/ajax');
 var { THROTTLE } = require("constants");
-var RouteActions = require('actions/RouteActions');
 
 var debouncedSubmit;
 
@@ -132,7 +131,7 @@ function saveConstruct(dialect, customParams, done) {
     data: JSON.stringify(params),
     headers: { 'Content-Type': 'application/json; charset=utf-8' },
   }, done, appStore.setError.bind(appStore));
-};
+}
 
 exports.generatePermalink = function(dialect) {
   saveConstruct(dialect, { public: false }, function(payload) {

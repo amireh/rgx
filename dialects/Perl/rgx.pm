@@ -87,15 +87,11 @@ while (my $c = <>) {
   } or do {
     my $e = $@;
 
-    if ($e =~ /internal/) {
-      $rc = { status => RC_BAD_REQUEST, error => $e };
-    } else {
-      $e =~ s/at .*\.pm.*$//;
-      $rc = {
-        status  => RC_BADPATTERN,
-        error   => $e
-      };
-    }
+    $e =~ s/at .*\.pm.*$//;
+    $rc = {
+      status  => RC_BADPATTERN,
+      message   => $e
+    };
   };
 
   print $json->encode($rc), "\n";

@@ -1,14 +1,17 @@
 var classSet = require("react/lib/cx");
 
 module.exports = function(classes, ...optional) {
-  var className = classes;
+  let className = classes;
 
   if (optional.length) {
-    optional.filter(function(className) {
-      return className && className.length > 0;
-    }).forEach(function(extraClassName) {
-      className[extraClassName] = true;
-    });
+    optional
+      .filter(function(staticClassName) {
+        return staticClassName && staticClassName.length > 0;
+      })
+      .forEach(function(staticClassName) {
+        className[staticClassName] = true;
+      })
+    ;
   }
 
   return classSet(className);

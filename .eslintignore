@@ -1,0 +1,8 @@
+dialects
+node_modules
+www
+ui/vendor/**/*
+ui/karma.conf.js
+test
+ui/css/fonts/**/*/demo.js
+ui/ext

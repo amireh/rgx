@@ -1,6 +1,5 @@
 const React = require("react");
 const Icon = require("components/Icon");
-const Button = require("components/Button");
 const DialectPicker = require("components/DialectPicker");
 const { Link } = require("react-router");
 const Popup = require('qjunk/lib/Popup');
@@ -31,7 +30,7 @@ var Banner = React.createClass({
     };
   },
 
-  componentDidUpdate: function(prevProps, prevState) {
+  componentDidUpdate: function() {
     if (this.refs.popup) {
       this.refs.popup.reposition();
     }

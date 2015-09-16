@@ -1,6 +1,4 @@
 const React = require('react');
-const md5 = require('blueimp-md5');
-const { Link } = require('react-router');
 const Editor = require('components/Editor');
 const Icon = require('components/Icon');
 const appStore = require('AppStore');
@@ -31,7 +29,7 @@ const Registry = React.createClass({
     ResultStore.addChangeListener(this.reload);
   },
 
-  componentDidUpdate: function(prevProps, prevState) {
+  componentDidUpdate: function(prevProps) {
     if (this.props.params.id) {
       if (
         prevProps.params.id !== this.props.params.id ||

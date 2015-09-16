@@ -8,7 +8,7 @@ var buffer = '';
 
 function run(construct) {
   var pattern = construct.pattern;
-  var subject = construct.subject;
+  var subject = construct.subject || '';
   var flags = construct.flags;
   var compiled, match;
 
@@ -19,13 +19,6 @@ function run(construct) {
     return {
       status: RC_BADPATTERN,
       message: e.message
-    };
-  }
-
-  if (!subject || !subject.length) {
-    return {
-      status: RC_BADPATTERN,
-      message: 'no subject!'
     };
   }
 

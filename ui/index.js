@@ -1,6 +1,5 @@
 var React = require('react');
 var Router = require('react-router');
-var AppStore = require('AppStore');
 var Root = require('./views/Root');
 var Actions = require('Actions');
 var $ = require('jquery');

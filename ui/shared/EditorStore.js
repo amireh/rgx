@@ -1,5 +1,4 @@
 var Store = require('Store');
-var appStore = require('AppStore');
 var subjectUUID = 0;
 
 function generateSubjectUUID() {

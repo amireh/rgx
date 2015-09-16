@@ -17,7 +17,7 @@ const Overlays = React.createClass({
     this.setupBodyForOverlaysIfPresent();
   },
 
-  componentDidUpdate: function(prevProps, prevState) {
+  componentDidUpdate: function() {
     this.setupBodyForOverlaysIfPresent();
   },
 

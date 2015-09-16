@@ -21,10 +21,6 @@ var ErrorNotifier = React.createClass({
     );
   },
 
-  dismiss: function() {
-    ;
-  },
-
   renderError: function(message) {
     return (
       <div>

@@ -30,7 +30,7 @@ var CodeTextarea = React.createClass({
     this.cm = null;
   },
 
-  componentDidUpdate: function(prevProps, prevState) {
+  componentDidUpdate: function() {
     if (this.props.value !== this.cm.getValue()) {
       this.cm.setValue(this.props.value);
       this.cm.markClean();

@@ -29,7 +29,7 @@ var EditorView = React.createClass({
     };
   },
 
-  componentDidUpdate: function(prevProps, prevState) {
+  componentDidUpdate: function(prevProps) {
     if (this.props.activeSubjectId !== prevProps.activeSubjectId && !this.props.readOnly) {
       this.refs.subject.focus();
     }
@@ -41,7 +41,7 @@ var EditorView = React.createClass({
       return subjectResult.result.status === K.RC_BADPATTERN;
     });
 
-    const { permalink, readOnly } = this.props;
+    const { readOnly } = this.props;
     const hasContent = (
       this.props.pattern.length > 0
       && this.props.subjects.filter((s) => s.text.length > 0).length > 0
@@ -169,7 +169,7 @@ var EditorView = React.createClass({
   renderPatternError: function() {
     var error = this.props.results.filter(function(subjectResult) {
       return subjectResult.result.status === K.RC_BADPATTERN;
-    })[0].result.error;
+    })[0].result.message;
 
     return (
       <EllipsifedText className="editor__pattern-error">

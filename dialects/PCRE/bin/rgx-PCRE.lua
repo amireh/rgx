@@ -21,14 +21,8 @@
 -- Uses lrexlib's pcre module to test a PCRE pattern on a subject.
 --
 ------------------
--- local rgx       = rgx
--- local cliargs = require 'lua_cliargs'
 local rex_pcre  = require 'rex_pcre'
 local json      = require 'dkjson'
-
--- if not rgx or not rgx.test_construct then
---   return error("rgx.lua: _G['rgx'] or rgx.test_construct implementation is missing!")
--- end
 
 local function matcher(raw_pattern, subject, flags)
   -- embed the compilation flags inline-style
@@ -56,11 +50,11 @@ local function onInput(json_construct)
   local construct = json.decode(json_construct)
 
   if not construct then
-    return { status = "error", error = "ERR_INVALID_JSON" }
+    return { status = "error", message = "ERR_INVALID_JSON" }
   end
 
   if not construct.pattern or not construct.subject then
-    return { status = "error", error = "ERR_MISSING_PATTERN" }
+    return { status = "error", message = "ERR_MISSING_PATTERN" }
   end
 
   local result, err = matcher(construct.pattern, construct.subject, construct.flags)
@@ -68,7 +62,7 @@ local function onInput(json_construct)
   if not result then
     return {
       status = "RC_BADPATTERN",
-      error  = err
+      message  = err
     }
   end
 
@@ -100,7 +94,6 @@ local function onInput(json_construct)
   end
 end
 
--- error('hi')
 print('ready')
 
 while true do

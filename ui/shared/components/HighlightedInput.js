@@ -1,8 +1,9 @@
 var React = require("react");
 var CodeMirror = require('codemirror');
-var modeHtmlMixed = require('codemirror/mode/htmlmixed/htmlmixed');
 var { debounce } = require("lodash");
 var { THROTTLE } = require("constants");
+
+require('codemirror/mode/htmlmixed/htmlmixed');
 
 var MATCH_HIGHLIGHT_OPTIONS = {
   className: 'highlighted-input__match'
@@ -38,7 +39,7 @@ var HighlightedInput = React.createClass({
     this.cm = null;
   },
 
-  componentDidUpdate: function(prevProps, prevState) {
+  componentDidUpdate: function() {
     this.highlight();
   },
 
