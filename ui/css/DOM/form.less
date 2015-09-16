@@ -1,0 +1,35 @@
+.schemable({
+  .form-input {
+    display: block;
+    line-height: 2em;
+    padding: 0.5em;
+    // line-height: 30px;
+    // padding: @whitespace / 2;
+    font-family: inherit;
+    border-style: solid;
+    border-width: 2px;
+    border-color: @base1;
+    color: inherit;
+    background: transparent;
+    margin: @whitespace 0;
+    width: 100%;
+  }
+});
+
+.form-label {
+  display: block;
+  margin: @whitespace 0;
+
+  &__caption {
+    font-weight: bold;
+    display: block;
+    margin: @whitespace 0;
+  }
+
+  &__error {
+    color: @solarized-red;
+    font-size: 0.85em;
+    // font-style: italic;
+    // font-weight: bold;
+  }
+}

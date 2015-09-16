@@ -4,8 +4,16 @@ var commonConfig = require("./webpack/common");
 var rgxConfig = require('./config');
 var nodeEnv = process.env.NODE_ENV || 'development';
 var config = {
-  plugins: [],
-  entry: {},
+  plugins: [
+    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
+    new webpack.NoErrorsPlugin(),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.DefinePlugin({
+      "process.env.NODE_ENV": JSON.stringify(nodeEnv),
+      "process.env.APP_ROOT": path.resolve(__dirname)
+    })
+  ],
+  entry: { index: [ "./ui/index.js" ] },
 
   output: {
     path: path.resolve(__dirname, "www"),
@@ -14,19 +22,6 @@ var config = {
   },
 
 };
-
-config.plugins.push(
-  new webpack.DefinePlugin({
-    "process.env.NODE_ENV": JSON.stringify(nodeEnv),
-    "process.env.APP_ROOT": path.resolve(__dirname)
-  })
-);
-
-config.plugins.push(new webpack.optimize.DedupePlugin());
-
-config.entry.index = [
-  "./ui/index.js"
-];
 
 if (process.env.NODE_ENV === "development") {
   var devServerPath = (
@@ -42,7 +37,6 @@ if (process.env.NODE_ENV === "development") {
 
 if (nodeEnv === 'production') {
   config.plugins.push(new webpack.optimize.UglifyJsPlugin());
-  config.plugins.push(new webpack.NoErrorsPlugin());
 }
 
 module.exports = commonConfig(config);

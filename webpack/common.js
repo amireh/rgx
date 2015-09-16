@@ -1,18 +1,22 @@
 var path = require("path");
 var extend = require("lodash").extend;
+var root = path.join(__dirname, '..', 'ui');
 
 var nodeEnv = process.env.NODE_ENV;
 var baseConfig = {
   devtool: nodeEnv === "production" ? null : "eval",
 
   resolve: {
-    // We will make webpack look in our own node_modules/ first so that any
-    // look-up from plugins to libraries we support, like react and lodash,
-    // won't resolve to that plugin's version of the library in its
-    // node_modules/ folder.
-    root: path.resolve(__dirname, '..', 'node_modules'),
+    root: [
+      path.resolve(__dirname, '..', 'node_modules'),
+      path.resolve(__dirname, '..', 'ui', 'shims')
+    ],
 
-    fallback: path.resolve(__dirname, "../node_modules"),
+    fallback: [
+      path.join(root, 'app', 'shared'),
+      path.join(root, 'app', 'css'),
+    ],
+
     modulesDirectories: [
       "css",
       "shared",
@@ -20,23 +24,27 @@ var baseConfig = {
     ],
     alias: {
       "dialects": path.resolve(__dirname, "../dialects"),
-      "qtip": path.join(__dirname, '..', 'ui', 'vendor', 'jquery.qtip.js')
+      "qtip": path.resolve(__dirname, '..', 'ui', 'vendor', 'jquery.qtip.js')
     }
   },
 
   resolveLoader: {
-    fallback: path.resolve(__dirname, "../node_modules")
+    root: path.resolve(__dirname, "../node_modules")
   },
 
   module: {
+    noParse: [],
+
     loaders: [
       {
-        test: /(ui|qjunk)\/(.*)\.js$/,
-        loader: [
-          'babel-loader',
-          'wrap-loader?js',
-          'react-hot'
-        ].join('!')
+        test: /\.js$/,
+        exclude: [ /ui\/vendor/ ],
+        include: [
+          path.join(__dirname, '..', 'ui'),
+          path.join(__dirname, '..', 'node_modules', 'qjunk', 'lib')
+        ],
+
+        loader: [ 'babel-loader', 'react-hot' ].join('!')
       },
 
       {
@@ -49,13 +57,6 @@ var baseConfig = {
         loader: 'style-loader!css-loader?importLoaders=1!less-loader'
       }
     ]
-  },
-
-  wrap: {
-    js: {
-      before: '(function(){\n',
-      after: '}());'
-    }
   }
 };
 

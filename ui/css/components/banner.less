@@ -1,28 +1,30 @@
 .schemable({
   @height: @banner-height;
+  @line-height: @banner-inner-height;
 
   .banner-wrapper {
-    background: @base3;
+    background: @base2;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     height: @height;
     z-index: 3;
-    border-bottom: @banner-border-dim solid @base2;
+    border-bottom: @banner-border-dim solid @border-color;
   }
 
   .banner {
     width: @content-width;
     margin: @whitespace auto;
-    height: @banner-inner-height;
+    // height: @banner-inner-height;
     position: relative;
+    line-height: @line-height;
 
     &__logo {
       margin: 0;
       letter-spacing: 2px;
       display: inline-block;
-      // vertical-align: middle;
+      vertical-align: middle;
     }
 
     &__logo-highlight {
@@ -30,30 +32,36 @@
     }
 
     &__motto {
+      display: inline-block;
       font-size: 10px;
-      margin: @whitespace 0 0 0;
+      margin: 0;
+      vertical-align: middle;
     }
   }
 
   .banner__navigation {
     position: absolute;
     right: 0;
-    top: @whitespace/3;
-    line-height: 1;
+    top: 0;
 
     &-item {
-      margin-left: @whitespace;
-      letter-spacing: 1px;
       .inline-block();
 
+      margin-left: 2em;
+      letter-spacing: 1px;
+
+      .icon {
+        line-height: inherit;
+      }
+
       .icon:before {
-        color: @solarized-cyan;
+        color: @accent;
         vertical-align: top;
       }
 
-      &:before, &:after {
-        font-size: 12px;
-      }
+      // &:before, &:after {
+      //   font-size: 12px;
+      // }
 
       // &:before {
       //   content: '[ ';

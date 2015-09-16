@@ -28,6 +28,8 @@
     "json-loader": "0.5.1",
     "less": "2.3.1",
     "less-loader": "2.0.0",
+    "normalize.css": "^3.0.3",
+    "qjunk": "1.0.2",
     "react": "0.12.2",
     "react-hot-loader": "1.1.4",
     "react-router": "0.11.6",
@@ -35,9 +37,7 @@
     "url-loader": "0.5.5",
     "webpack": "1.5.3",
     "webpack-dev-middleware": "1.0.11",
-    "webpack-dev-server": "1.7.0",
-    "wrap-loader": "0.0.2",
-    "qjunk": "1.0.0"
+    "webpack-dev-server": "1.7.0"
   },
   "repository": {
     "type": "git",

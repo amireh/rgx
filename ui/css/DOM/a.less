@@ -1,0 +1,23 @@
+a {
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: bold;
+
+  &:hover, &:focus {
+    text-decoration: underline;
+  }
+
+  &.active {
+    font-weight: bold;
+  }
+}
+
+.schemable({
+  a, a:visited {
+    color: @base0;
+  }
+
+  a.active {
+    color: @accent;
+  }
+});

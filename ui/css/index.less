@@ -1,30 +1,52 @@
+@import "~normalize.css";
 @import "variables";
 @import "helpers";
-@import "skin-flat";
-@import "fonts/rgx-1.2/style";
-@import "qtip";
+@import "typography";
+@import "DOM/a";
+@import "DOM/blockquote";
+@import "DOM/body";
+@import "DOM/code";
+@import "DOM/fieldset";
+@import "DOM/form";
+@import "DOM/h";
+@import "DOM/hr";
+@import "DOM/html";
+@import "DOM/input";
+@import "DOM/ulol";
+@import "DOM/table";
+
+* {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+:disabled, [disabled] {
+  pointer-events: none;
+  cursor: default;
+}
+
+
 @import "~codemirror/lib/codemirror.css";
-@import "~codemirror";
-@import "~components/banner";
-@import "~components/h-tabbed-pannel";
-@import "~components/editor";
-@import "~components/highlighted-input";
-@import "~components/color-scheme-switcher";
-@import "~components/flag-picker";
+@import "ext/codemirror";
+
+@import "vendor/qtip";
+@import "ext/qtip";
+
+// @import "skin-flat";
+@import "fonts/rgx-1.2/style";
+@import "components/root";
+@import "components/btn";
+@import "components/banner";
+@import "components/h-tabbed-pannel";
+@import "components/editor";
+@import "components/highlighted-input";
+@import "components/color-scheme-switcher";
+@import "components/flag-picker";
 @import "~qjunk/lib/Checkbox/index";
-@import "~components/dialect-picker";
-@import "~components/error-notifier";
-@import "~components/editor-actionbar";
-@import "overlays";
-@import "~components/Cheatsheet";
-@import "~components/registry";
-
-.app-container {
-  width: @content-width;
-  margin: 0 auto;
-  margin-top: @content-top-offset;
-}
-
-.qtip-content {
-  padding: 0;
-}
+@import "components/dialect-picker";
+@import "components/error-notifier";
+@import "components/editor-actionbar";
+@import "components/overlay";
+@import "components/cheatsheet";
+@import "components/registry";

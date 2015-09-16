@@ -1,22 +1,8 @@
+@import "variables";
+
 .vertical-inline() {
   display: inline-block;
   vertical-align: middle;
-}
-
-.type-ellipsify {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  resize: none;
-  display: inline-block;
-}
-
-.type-strong {
-  font-weight: bold;
-}
-
-.type-small {
-  font-size: 10px;
 }
 
 .text-right {
@@ -33,24 +19,46 @@
 }
 
 .schemable(@rules) {
+  body.plain {
+    @base0: @plain-base0;
+    @base1: @plain-base01;
+    @base2: @plain-base02;
+    @base3: @plain-base03;
+    @accent: @plain-accent;
+    @code: @plain-code;
+    @border-color: @plain-border-color;
+    @link: @plain-link;
+
+    @rules();
+  }
+
   body.solarized--light {
-    @base0: @solarized-base0;
+    @base0: @solarized-base00;
     @base1: @solarized-base1;
     @base2: @solarized-base2;
     @base3: @solarized-base3;
+    @accent: @solarized-cyan;
+    @code: @base2;
+    @border-color: darken(@base2, 5%);
+    @link: @solarized-blue;
 
     @rules();
   }
 
   body.solarized--dark  {
-    @base0: @solarized-base00;
+    @base0: @solarized-base0;
     @base1: @solarized-base01;
     @base2: @solarized-base02;
     @base3: @solarized-base03;
+    @accent: @solarized-cyan;
+    @code: @base2;
+    @border-color: @base2;
+    @link: @solarized-blue;
 
     @rules();
   }
 }
+
 
 .iconify(@glyph:'') {
   font-family: 'rgx';
