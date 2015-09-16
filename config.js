@@ -9,6 +9,7 @@ exports.DIALECT_BINMAP = {
   'PCRE': 'rgx-PCRE.lua',
   'Ruby': 'rgx-Ruby.rb',
   'Perl': 'rgx-Perl.pm',
+  'JavaScript': 'rgx-JavaScript.js',
 };
 
 exports.CAPABILITIES = {
@@ -21,7 +22,7 @@ exports.CAPABILITIES = {
 exports.AVAILABLE_DIALECTS = [
   // 'C++',
   // 'Java',
-  // 'JavaScript',
+  'JavaScript',
   // 'Lua',
   'PCRE',
   // 'PHP',

@@ -84,7 +84,7 @@ local function onInput(json_construct)
     -- map the captures as [b,e] offset arrays
     for i=1,#result[3],2 do
       if result[3][i] == false or result[3][i+1] < result[3][i] then
-        table.insert(captures, {})
+        -- table.insert(captures, {})
       else
         table.insert(captures, { result[3][i]-1, result[3][i+1] })
       end

@@ -36,7 +36,7 @@ def match(pattern, subject, flags)
     return {
       status: RC_BADPATTERN,
       error: e.message
-    }.to_json
+    }
   end
 
   match = re.match(subject)
@@ -47,7 +47,7 @@ def match(pattern, subject, flags)
       offset: [ match.begin(0), match.end(0) ],
       captures: (1..match.length-1).map do |i|
         [ match.begin(i), match.end(i) ]
-      end
+      end.reject { |v| v[0].nil? || v[1].nil? }
     }
   else
     rc = {
@@ -67,6 +67,7 @@ write "ready"
 
 while input = STDIN.gets
   decoded_input = ::JSON.parse(input)
+
   write match(
     decoded_input['pattern'].to_s,
     decoded_input['subject'].to_s,

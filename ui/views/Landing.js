@@ -36,7 +36,7 @@ var Landing = React.createClass({
 
         <DialectPicker
           listMode
-          availableLanding={appStore.getAvailableDialects()}
+          availableDialects={appStore.getAvailableDialects()}
         />
 
         <p>

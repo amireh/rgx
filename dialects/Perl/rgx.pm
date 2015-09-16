@@ -63,6 +63,7 @@ while (my $c = <>) {
         $_[0] =~ /(?$flags:$ptrn)/;
         @offset = ($-[0],$+[0]);
 
+
         foreach $cap (1..$#-) {
           my @cap_offset = ($-[$cap],$+[$cap]);
 
