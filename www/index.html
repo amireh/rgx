@@ -14,15 +14,26 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
 
     <title>rgx.io</title>
+
+    <link rel="stylesheet" href="splash.css" />
   </head>
 
   <body>
-    <div id="__app__">
-      <div class="LoadingScreen">
-        Loading... please wait.
+    <div class="splash">
+      <p class="splash__logo">
+        <span class="splash__accent">[</span>
+          rgx.io
+        <span class="splash__accent">]</span>
+      </p>
+
+      <div class="splash__loading-dots">
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
     </div>
 
+    <div id="__app__"></div>
     <div id="__overlays__"></div>
 
     <script src="./vendor.js"></script>

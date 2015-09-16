@@ -4,6 +4,8 @@ var AppStore = require('AppStore');
 var Root = require('./views/Root');
 var Overlays = require('./views/Overlays');
 var Actions = require('Actions');
+var $ = require('jquery');
+var SPLASH_HIDE_DURATION = 500;
 
 require('./config/codemirror');
 require('./css/index.less');
@@ -40,7 +42,16 @@ var router = Router.create({
 });
 
 router.run(function(Handler, state) {
+  const $splash = $('.splash');
+
   Actions.clearTransientState();
+
+  $splash.addClass('splash--hidden');
+
+  setTimeout(function() {
+    $splash.remove();
+  }, SPLASH_HIDE_DURATION);
+
   React.render(<Overlays {...state} />, document.querySelector('#__overlays__'));
   React.render(<Handler {...state} />, document.querySelector("#__app__"));
 });
