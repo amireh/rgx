@@ -11,13 +11,11 @@ const ColorSchemeSwitcher = React.createClass({
 
   render() {
     return(
-      <Button
+      <Icon
         onClick={this.switchScheme}
-        className="color-scheme-switcher"
-        title="Switch Scheme"
-      >
-        <Icon className="icon-contrast" />
-      </Button>
+        className="color-scheme-switcher icon-contrast"
+        title="Switch Color Scheme"
+      />
     );
   },
 

@@ -37,7 +37,6 @@ var baseConfig = {
 
     loaders: [
       {
-        type: 'js',
         test: /\.js$/,
         exclude: [ /ui\/vendor/ ],
         include: [
@@ -45,7 +44,10 @@ var baseConfig = {
           path.join(__dirname, '..', 'node_modules', 'qjunk', 'lib')
         ],
 
-        loader: 'babel-loader'
+        loader: [
+          'babel-loader',
+          process.env.NODE_ENV === 'development' && 'react-hot'
+        ].filter(function(loader) { return !!loader; }).join('!')
       },
 
       {

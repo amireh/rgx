@@ -5,6 +5,7 @@ var Icon = React.createClass({
     return(
       <i
         className={"icon " + this.props.className}
+        title={this.props.title}
         onClick={this.props.onClick}
       />
     );

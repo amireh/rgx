@@ -1,1 +1,5 @@
-{}
+{
+  "i": "Makes matching case-insensitive",
+  "m": "Multiline matching",
+  "g": "Global (repetitive) matching"
+}

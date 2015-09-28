@@ -1,5 +1,15 @@
 .color-scheme-switcher {
   position: fixed;
-  bottom: @whitespace;
-  right: @whitespace;
+  bottom: 0;
+  right: 0;
+  cursor: pointer;
+  padding: @whitespace;
+  display: inline-block;
+  z-index: 0;
 }
+
+.schemable({
+  .color-scheme-switcher {
+    background-color: none;
+  }
+});
