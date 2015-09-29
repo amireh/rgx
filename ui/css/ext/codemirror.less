@@ -7,11 +7,13 @@
 
     &:after {
       content: '';
-      border-right: 0.5em solid @base2;
+      width: 0.5em;
+      border-right: 1px solid transparent;
+      background: @base2;
       position: absolute;
       top: 1px;
       bottom: 1px;
-      right: 1px;
+      right: 0;
       z-index: 2;
     }
   }
@@ -26,6 +28,10 @@
 
   .CodeMirror-focused {
     box-shadow: 0 0 0 1px @border-color inset;
+
+    &:after {
+      border-right-color: @border-color;
+    }
   }
 
   .CodeMirror-selected  {

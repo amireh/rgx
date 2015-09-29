@@ -72,10 +72,9 @@ exports.submit = function(dialect) {
   };
 
   ajax({
-    url: `/dialects/${dialect}`,
+    url: `/api/dialects/${dialect}`,
     type: 'POST',
     data: JSON.stringify(params),
-    headers: { 'Content-Type': 'application/json; charset=utf-8' },
   }, function(payload) {
     resultStore.setState({
       results: payload.map(function(result, i) {
@@ -126,10 +125,9 @@ function saveConstruct(dialect, customParams, done) {
   });
 
   ajax({
-    url: '/registry',
+    url: '/api/registry',
     type: 'POST',
     data: JSON.stringify(params),
-    headers: { 'Content-Type': 'application/json; charset=utf-8' },
   }, done, appStore.setError.bind(appStore));
 }
 
@@ -152,7 +150,7 @@ exports.publish = function(dialect, customParams, done) {
 };
 
 exports.retrievePermalink = function(permalink) {
-  ajax({ url: `/registry/${permalink}` }, function(payload) {
+  ajax({ url: `/api/registry/${permalink}` }, function(payload) {
     editorStore.clearState();
     editorStore.use(payload);
     exports.submit(payload.dialect);
@@ -161,7 +159,7 @@ exports.retrievePermalink = function(permalink) {
 
 exports.vote = function(docId, upOrDown) {
   ajax({
-    url: `/registry/${docId}/${upOrDown ? 'upvote' : 'downvote'}`,
+    url: `/api/registry/${docId}/${upOrDown ? 'upvote' : 'downvote'}`,
     type: 'PATCH'
   }, function(newDoc) {
     console.log(docId, `was ${upOrDown ? 'up voted' : 'down voted'}`, 'down to', newDoc.stars);

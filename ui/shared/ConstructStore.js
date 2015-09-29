@@ -11,9 +11,8 @@ class ConstructStore extends Store {
 
   fetch() {
     ajax({
-      url: '/registry',
+      url: '/api/registry',
       data: JSON.stringify({ page: 0 }),
-      headers: { 'Content-Type': 'application/json; charset=utf-8' },
     }, (constructs) => {
       this.setState({ constructs });
     });

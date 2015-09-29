@@ -46,6 +46,8 @@ module.exports = function(options, onSuccess, onError) {
   };
 
   xhr.open(method, url, async);
+  xhr.setRequestHeader('Content-Type', 'application/json; charset=utf-8');
+  xhr.setRequestHeader('Accept', 'application/json; charset=utf-8');
 
   if (options.headers) {
     Object.keys(options.headers).forEach(function(header) {
