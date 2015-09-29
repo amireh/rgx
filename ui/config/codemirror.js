@@ -1,19 +1,14 @@
 var CodeMirror = require('codemirror');
-// var theme = 'zenburn';
 
-// require('codemirror/mode/javascript/javascript');
 require('codemirror/addon/display/placeholder');
 require('codemirror/addon/selection/mark-selection');
 require('codemirror/addon/edit/matchbrackets');
 require('codemirror/addon/scroll/simplescrollbars');
-// require('style!css!codemirror/theme/' + theme + '.css');
 
-// CodeMirror.defaults.theme = theme;
 CodeMirror.defaults.lineNumbers = false;
 CodeMirror.defaults.dragDrop = false;
 CodeMirror.defaults.styleSelectedText = true;
-// CodeMirror.defaults.matchBrackets = true;
-// CodeMirror.defaults.mode = 'javascript';
+
 CodeMirror.defaults.extraKeys = {
   'Tab': false,
   'Shift-Tab': false
@@ -27,7 +22,7 @@ CodeMirror.defineMode("regex", function() {
   var tokenBase = function(stream) {
     var ch = stream.next();
 
-    if (ch == "\\" && stream.match(/./, false)) {
+    if (ch === "\\" && stream.match(/./, false)) {
       if (stream.match(/u\w{4}/)) return "a";
       if (stream.match(/u/)) return "err";
 
@@ -40,25 +35,25 @@ CodeMirror.defineMode("regex", function() {
     }
 
 
-    if (ch == "{"){
+    if (ch === "{"){
       if (stream.match(/(\d|\d,\d?)\}/))  return "a";
     }
 
-    if (ch == "[" && stream.match(/[^\]]+\]/)){
+    if (ch === "[" && stream.match(/[^\]]+\]/)){
       return "b";
     }
 
-    if (ch == "|") {
+    if (ch === "|") {
       return "g" + g;
     }
 
-    if (ch == "(") {
+    if (ch === "(") {
       stream.match(/[\?\!\:]+/);
       return "g" + (++g % 5);
     }
 
-    if (ch == ")") {
-      if(g-1 < 0) return "err";
+    if (ch === ")") {
+      if (g - 1 < 0) return "err";
       return "g" + (g-- % 5);
     }
 
@@ -68,9 +63,10 @@ CodeMirror.defineMode("regex", function() {
   };
 
   return {
-    startState: function(base) {
-      g= 0;
+    startState: function(/*base*/) {
+      g = 0;
     },
+
     token: tokenBase
   };
 });

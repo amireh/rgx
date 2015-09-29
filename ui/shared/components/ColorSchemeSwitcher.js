@@ -1,5 +1,4 @@
 const React = require("react");
-const Button = require("components/Button");
 const Icon = require("components/Icon");
 const $ = require('jquery');
 const { AVAILABLE_SCHEMES, DEFAULT_SCHEME } = require("constants");
