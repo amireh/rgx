@@ -3,10 +3,19 @@ const Button = require("components/Button");
 const Icon = require("components/Icon");
 const $ = require('jquery');
 const { AVAILABLE_SCHEMES, DEFAULT_SCHEME } = require("constants");
+const Storage = require('core/Storage');
+
+Storage.register('colorScheme', DEFAULT_SCHEME);
 
 const ColorSchemeSwitcher = React.createClass({
   componentDidMount: function() {
-    $(document.body).addClass(DEFAULT_SCHEME);
+    Storage.on('change', this.applyColorScheme);
+
+    this.applyColorScheme();
+  },
+
+  componentWillUnmount: function() {
+    Storage.off('change', this.applyColorScheme);
   },
 
   render() {
@@ -19,26 +28,28 @@ const ColorSchemeSwitcher = React.createClass({
     );
   },
 
+  applyColorScheme() {
+    const $body = $(document.body);
+
+    AVAILABLE_SCHEMES.forEach(function(possiblyCurrentScheme) {
+      $body.removeClass(possiblyCurrentScheme);
+    });
+
+    $body.addClass(Storage.getItem('colorScheme'));
+  },
+
   switchScheme: function() {
     let className = document.body.className;
-    let currScheme, nextScheme;
+    let nextScheme;
 
     AVAILABLE_SCHEMES.some(function(scheme, i) {
       if (className.indexOf(scheme) > -1) {
-        currScheme = scheme;
-        nextScheme = nextScheme || AVAILABLE_SCHEMES[i+1] || AVAILABLE_SCHEMES[0];
+        nextScheme = AVAILABLE_SCHEMES[i+1] || AVAILABLE_SCHEMES[0];
         return true;
       }
     });
 
-    if (currScheme && nextScheme) {
-      className = className.replace(currScheme, nextScheme);
-    }
-    else {
-      className = DEFAULT_SCHEME;
-    }
-
-    document.body.className = className;
+    Storage.setItem('colorScheme', nextScheme);
   }
 });
 

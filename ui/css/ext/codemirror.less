@@ -4,6 +4,16 @@
     color: inherit;
     padding: 0.5em;
     line-height: inherit;
+
+    &:after {
+      content: '';
+      border-right: 0.5em solid @base2;
+      position: absolute;
+      top: 1px;
+      bottom: 1px;
+      right: 1px;
+      z-index: 1000;
+    }
   }
 
   .CodeMirror-cursor {
@@ -18,12 +28,6 @@
     box-shadow: 0 0 0 1px @border-color inset;
   }
 
-  // .CodeMirror:not(.CodeMirror-focused) {
-  //   .CodeMirror-lines {
-  //     border-left: 1px solid @base1;
-  //   }
-  // }
-
   .CodeMirror-selected  {
     background-color: @accent;
   }
@@ -31,4 +35,32 @@
   .CodeMirror-selectedtext {
     color: white;
   }
+
+  @opacity: 15%;
+
+  .cm-s-regex span.cm-a   { background: fade(@solarized-green, @opacity); }
+  .cm-s-regex span.cm-b   { background: fade(@solarized-yellow, @opacity); }
+  .cm-s-regex span.cm-g1  { background: fade(@solarized-red, @opacity); }
+  .cm-s-regex span.cm-g2  { background: fade(@solarized-magenta, @opacity); }
+  .cm-s-regex span.cm-g3  { background: fade(@solarized-violet, @opacity); }
+  .cm-s-regex span.cm-g4  { background: fade(@solarized-blue, @opacity); }
+  .cm-s-regex span.cm-g5  { background: fade(@solarized-cyan, @opacity); }
+  .cm-s-regex span.cm-err { background: fade(@solarized-red, @opacity); }
+
+  .cm-s-regex span.CodeMirror-matchingbracket {
+    background: fade(@solarized-cyan, 50%);
+    color: white;
+  }
+
+  // .CodeMirror-scroll {
+  //   margin-right: 0;
+  //   margin-bottom: 0;
+  //   // padding-bottom: 30px;
+  //   overflow: auto !important;
+  // }
+
+  // .CodeMirror-sizer {
+  //   border-right-width: 0 !important;
+  //   // margin-right: 0;
+  // }
 });

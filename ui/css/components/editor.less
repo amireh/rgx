@@ -1,14 +1,13 @@
 .editor {
-  @flags-width: 80px;
+  @flags-width: 3em;
 
   &__pattern-and-flags {
-    padding-left: @flags-width;
+    padding-left: @flags-width * 2;
     position: relative;
 
     .flags-input-container {
       display: inline-block;
       vertical-align: top;
-      width: @flags-width;
       position: absolute;
       left: 0;
       top: 0;
@@ -17,13 +16,16 @@
 
       .form-label__caption {
         margin-top: 0;
-        // margin-bottom: 0;
       }
 
       .CodeMirror {
         display: inline-block;
-        width: @flags-width - @whitespace;
+        width: @flags-width;
         overflow: hidden;
+      }
+
+      .code-textarea {
+        font-size: 24px;
       }
     }
 
@@ -34,6 +36,7 @@
         display: inline-block;
         vertical-align: top;
         width: 100%;
+        font-size: 24px;
       }
     }
 

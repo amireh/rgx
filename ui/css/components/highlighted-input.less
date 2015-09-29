@@ -7,10 +7,16 @@
 
     &__capture {
       color: @solarized-orange;
+
+      &.gm-1 { color: negation(@solarized-green, @solarized-cyan); }
+      &.gm-2 { color: negation(@solarized-red, @solarized-cyan); }
+      &.gm-3 { color: negation(@solarized-yellow, @solarized-cyan); }
     }
 
     .CodeMirror {
       height: auto;
+      font-size: 18px;
+      font-weight: 100;
     }
   }
 
@@ -24,5 +30,6 @@
       background-color: inherit;
       color: negation(@solarized-orange, @solarized-cyan);
     }
+
   }
 });

@@ -15,4 +15,4 @@ exports.AVAILABLE_SCHEMES = [
   'solarized--light',
   'solarized--dark'
 ];
-exports.DEFAULT_SCHEME = 'plain';
+exports.DEFAULT_SCHEME = 'solarized--light';

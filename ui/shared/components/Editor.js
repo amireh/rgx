@@ -30,8 +30,18 @@ var EditorView = React.createClass({
   },
 
   componentDidUpdate: function(prevProps) {
-    if (this.props.activeSubjectId !== prevProps.activeSubjectId && !this.props.readOnly) {
-      this.refs.subject.focus();
+    if (
+      prevProps.activeSubjectId &&
+      prevProps.activeSubjectId !== this.props.activeSubjectId &&
+      !this.props.readOnly
+    ) {
+      // timeout needed to avoid getting both pattern and subject input focused
+      // at the same time (CodeMirror)
+      setTimeout(() => {
+        if (this.isMounted()) {
+          this.refs.subject.focus();
+        }
+      }, 1);
     }
   },
 
@@ -73,6 +83,12 @@ var EditorView = React.createClass({
                 value={this.props.pattern}
                 placeholder="foo(.*)"
                 autoFocus
+                options={{
+                  mode: 'regex',
+                  theme: 'regex',
+                  matchBrackets: true,
+                  scrollbarStyle: null
+                }}
               />
             </Label>
           </div>

@@ -9,10 +9,6 @@ var MATCH_HIGHLIGHT_OPTIONS = {
   className: 'highlighted-input__match'
 };
 
-var CAPTURE_HIGHLIGHT_OPTIONS = {
-  className: 'highlighted-input__capture'
-};
-
 var HighlightedInput = React.createClass({
   displayName: "HighlightedInput",
 
@@ -71,8 +67,10 @@ var HighlightedInput = React.createClass({
     }
 
     if (captures) {
-      captures.forEach(function(capture) {
-        highlight(capture, CAPTURE_HIGHLIGHT_OPTIONS);
+      captures.forEach(function(capture, index) {
+        highlight(capture, {
+          className: `highlighted-input__capture gm-${index+1}`
+        });
       });
     }
   },

@@ -1,19 +1,17 @@
-var React = require("react");
-var appStore = require("AppStore");
-var DialectPicker = require("components/DialectPicker");
+const React = require("react");
+const appStore = require("AppStore");
+const DialectPicker = require("components/DialectPicker");
+const { Link } = require('react-router');
 
-var Landing = React.createClass({
-  displayName: "Landing",
-
+const Landing = React.createClass({
   render() {
     return(
       <div className="landing">
         <h2>Welcome, expressionist.</h2>
 
         <p>
-          <code>[:rgx:]</code> is a beautiful, powerful <strong>regular
-          expression editor </strong> that supports a large number of regex
-          dialects (or languages, or flavors!)
+          <code>[:rgx:]</code> is a <strong>regular expression editor </strong>
+          that supports a large number of regex dialects (or languages, or flavors!)
         </p>
 
         <p>
@@ -22,17 +20,17 @@ var Landing = React.createClass({
 
         <ul>
           <li>Real-time expression testing and match highlighting</li>
-          <li>Testing of expressions against multiple subjects</li>
+          <li>Testing of expressions against <strong>multiple subjects</strong></li>
           <li>
-            Generating <em>permalinks</em> to constructs so they can be
-            shared and reviewed later using a URL
+            Generating <strong>permalinks</strong> to constructs so they can be
+            <strong> shared</strong> and <strong>reviewed later</strong> with a URL
           </li>
 
-          <li>A public registry for sharing constructs</li>
+          <li>A public <Link to="registry">registry</Link> for sharing constructs</li>
           <li>More. <em>Secrets!</em></li>
         </ul>
 
-        <h2>Try it. Pick your flavor</h2>
+        <h2>Try it. Pick a flavor:</h2>
 
         <DialectPicker
           listMode
@@ -47,7 +45,7 @@ var Landing = React.createClass({
           about it, or even add it yourself.
         </p>
 
-        <h2>Obligatory Misc: What's with the awkward name?</h2>
+        <h2>What's with the awkward name?</h2>
 
         <p>
           It's the only remaining name that is remotely-relevant and has a

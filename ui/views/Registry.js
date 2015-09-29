@@ -109,11 +109,15 @@ const Registry = React.createClass({
       return null;
     }
 
+    const hasTitle = c.title && c.title.length > 0;
+
     return (
       <div>
-        <h1>{c.title || 'Untitled'}</h1>
+        <h2 className="registry-entry__title">
+          {hasTitle ? c.title : (c.description || 'Untitled')}
+        </h2>
 
-        {c.description.length > 0 && (
+        {hasTitle && c.description.length > 0 && (
           <p>{c.description}</p>
         )}
 

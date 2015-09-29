@@ -11,7 +11,7 @@ var CodeTextarea = React.createClass({
     onChange: func.isRequired,
     value: string,
     placeholder: string,
-    options: object
+    options: object,
   },
 
   componentDidMount: function() {

@@ -6,7 +6,6 @@
   font-size: 0.9em;
   letter-spacing: 1px;
   font-family: inherit;
-  transition: background 0.08s ease-out 0s;
 }
 
 a.btn {
@@ -18,11 +17,11 @@ a.btn {
     background: @base2;
     color: inherit;
     box-shadow:
-      0 -2px 0 0px darken(@base2, 5%) inset
+      0 -3px 0 0px @border-color inset
     ;
 
     &:hover {
-      background: @base3;
+      background: @border-color;
     }
 
     &:active, &--active {
