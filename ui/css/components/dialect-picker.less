@@ -12,20 +12,40 @@
   &--list .dialect-picker__dialect {
     display: block;
   }
+
+  &__status {
+    display: inline-block;
+    width: 0.75em;
+    height: 0.75em;
+    margin-left: 0.5em;
+  }
 }
 
 .schemable({
-  .dialect-picker__dialect--active a {
-    color: @solarized-cyan;
-  }
-});
+  .dialect-picker {
+    &__dialect--active a {
+      color: @solarized-cyan;
+    }
 
-.schemable({
+    &__status {
+      &--online {
+        background: @solarized-green;
+      }
+
+      &--offline {
+        background: @solarized-red;
+      }
+
+      &--unknown {
+        background: @base1;
+      }
+    }
+  }
+
   .qtip .dialect-picker {
     background: @base2;
     padding: @whitespace/2;
     max-height: 200px;
-    // width: 120px;
     overflow: auto;
     border: 1px solid @base1;
     white-space: nowrap;

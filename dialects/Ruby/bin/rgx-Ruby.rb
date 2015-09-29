@@ -66,7 +66,7 @@ end
 write "ready"
 
 while input = STDIN.gets
-  decoded_input = ::JSON.parse(input)
+  decoded_input = JSON.parse(input)
 
   write match(
     decoded_input['pattern'].to_s,

@@ -3,7 +3,7 @@ var Router = require('react-router');
 var Root = require('./views/Root');
 var Actions = require('Actions');
 var $ = require('jquery');
-var SPLASH_HIDE_DURATION = 500;
+var SPLASH_HIDE_DURATION = 750;
 
 require('./config/codemirror');
 require('./css/index.less');

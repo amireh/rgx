@@ -1,16 +1,17 @@
-var React = require("react");
-var Router = require("react-router");
-var RouteActions = require("actions/RouteActions");
-var getConfig = require("getConfig");
-var ColorSchemeSwitcher = require("components/ColorSchemeSwitcher");
-var ErrorNotifier = require("components/ErrorNotifier");
-var Banner = require('components/Banner');
-var appStore = require('AppStore');
-var Overlays = require('./Overlays');
+const React = require("react");
+const Router = require("react-router");
+const RouteActions = require("actions/RouteActions");
+const getConfig = require("getConfig");
+const ColorSchemeSwitcher = require("components/ColorSchemeSwitcher");
+const ErrorNotifier = require("components/ErrorNotifier");
+const Banner = require('components/Banner');
+const AppStore = require('AppStore');
+const Overlays = require('./Overlays');
+const Heartbeat = require('Heartbeat');
 
-var { RouteHandler } = Router;
+const { RouteHandler } = Router;
 
-var Root = React.createClass({
+const Root = React.createClass({
   mixins: [ Router.Navigation, Router.State ],
 
   getDefaultProps() {
@@ -22,11 +23,14 @@ var Root = React.createClass({
 
   componentDidMount: function() {
     RouteActions.assignDelegate(this);
-    appStore.addChangeListener(this.reload);
+    AppStore.addChangeListener(this.reload);
+    Heartbeat.addChangeListener(this.reload);
+    Heartbeat.check();
   },
 
   componentWillUnmount: function() {
-    appStore.removeChangeListener(this.reload);
+    Heartbeat.removeChangeListener(this.reload);
+    AppStore.removeChangeListener(this.reload);
     RouteActions.assignDelegate(undefined);
   },
 
@@ -34,14 +38,15 @@ var Root = React.createClass({
     return (
       <div className="root">
         <Banner
+          path={this.props.path}
           dialect={this.props.params.dialect}
           query={this.props.query}
         />
 
         <div className="root__content">
           <ErrorNotifier
-            error={appStore.getLatestError()}
-            internalError={appStore.getLatestInternalError()}
+            error={AppStore.getLatestError()}
+            internalError={AppStore.getLatestInternalError()}
           />
 
           <RouteHandler
@@ -61,8 +66,6 @@ var Root = React.createClass({
   },
 
   reload: function() {
-    console.debug('Root: Rendering.');
-
     this.forceUpdate();
   },
 });

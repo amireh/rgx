@@ -16,7 +16,7 @@
   color: #657b83;
 
   opacity: 1;
-  transition: opacity 0.5s ease-in 0s;
+  transition: opacity 0.75s ease-in 0s;
 }
 
 .splash.splash--hidden {

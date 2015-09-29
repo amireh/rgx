@@ -13,14 +13,12 @@ var Editor = React.createClass({
     EditorStore.addChangeListener(this.reload);
     ResultStore.addChangeListener(this.reload);
 
-    if (this.props.params.permalink) {
-      this.consumePermalink();
-    }
+    this.consumePermalinkIfNecessary();
   },
 
   componentDidUpdate: function(prevProps) {
     if (prevProps.params.permalink !== this.props.params.permalink) {
-      this.consumePermalink();
+      this.consumePermalinkIfNecessary();
     }
   },
 
@@ -100,8 +98,12 @@ var Editor = React.createClass({
     return decodeURIComponent(this.props.params.dialect);
   },
 
-  consumePermalink() {
-    Actions.retrievePermalink(this.props.params.permalink);
+  consumePermalinkIfNecessary() {
+    const { permalink } = this.props.params;
+
+    if (permalink && permalink.length) {
+      Actions.retrievePermalink(permalink);
+    }
   }
 });
 

@@ -30,9 +30,14 @@ var Banner = React.createClass({
     };
   },
 
-  componentDidUpdate: function() {
+  componentDidUpdate: function(prevProps) {
     if (this.refs.popup) {
-      this.refs.popup.reposition();
+      if (prevProps.path !== this.props.path) {
+        this.closeDialectPickerPopup();
+      }
+      else {
+        this.refs.popup.reposition();
+      }
     }
   },
 
@@ -59,32 +64,30 @@ var Banner = React.createClass({
           </p>
 
           <nav className="banner__navigation">
-            {true &&
-              <Popup
-                ref="popup"
-                content={DialectPicker}
-                activeDialect={dialect}
-                availableDialects={AppStore.getAvailableDialects()}
-                onClick={this.closeDialectPickerPopup}
-                popupOptions={
-                  {
-                    position: {
-                      my: 'top center',
-                      at: 'bottom center',
-                      offset: {
-                        y: -10
-                      }
+            <Popup
+              ref="popup"
+              content={DialectPicker}
+              activeDialect={dialect}
+              availableDialects={AppStore.getAvailableDialects()}
+              onClick={this.closeDialectPickerPopup}
+              popupOptions={
+                {
+                  position: {
+                    my: 'top center',
+                    at: 'bottom center',
+                    offset: {
+                      y: -10
                     }
                   }
                 }
-              >
-                <BannerItem>
-                  <Icon className="icon-arrow-down" />
-                  {' '}
-                  <a>{dialect || 'Choose a Dialect'}</a>
-                </BannerItem>
-              </Popup>
-            }
+              }
+            >
+              <BannerItem>
+                <Icon className="icon-arrow-down" />
+                {' '}
+                <a>{dialect || 'Choose a Dialect'}</a>
+              </BannerItem>
+            </Popup>
 
             {dialect.length > 0 &&
               <BannerItem>

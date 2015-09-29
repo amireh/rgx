@@ -4,6 +4,7 @@ exports.WEBPACK_DEVSERVER_HOST = process.env.HOST || '0.0.0.0';
 exports.WEBPACK_DEVSERVER_PORT = process.env.WEBPACK_PORT || 8953;
 exports.DIALECTS_DIR = 'dialects';
 exports.SIGNAL_READY = 'ready\n';
+exports.HEARTBEAT_PULSE = 5 * 60 * 1000;
 
 exports.DIALECT_BINMAP = {
   'PCRE': 'rgx-PCRE.lua',
@@ -28,5 +29,5 @@ exports.AVAILABLE_DIALECTS = [
   // 'PHP',
   'Perl',
   // 'Python',
-  'Ruby'
+  'Ruby',
 ];

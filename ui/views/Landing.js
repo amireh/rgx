@@ -2,8 +2,13 @@ const React = require("react");
 const appStore = require("AppStore");
 const DialectPicker = require("components/DialectPicker");
 const { Link } = require('react-router');
+const Heartbeat = require('Heartbeat');
 
 const Landing = React.createClass({
+  componentDidMount() {
+    Heartbeat.check();
+  },
+
   render() {
     return(
       <div className="landing">

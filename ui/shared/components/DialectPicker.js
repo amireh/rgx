@@ -1,6 +1,27 @@
-var React = require("react");
-var { arrayOf, string } = React.PropTypes;
-var classSet = require('utils/classSet');
+const React = require("react");
+const { bool, arrayOf, string } = React.PropTypes;
+const classSet = require('utils/classSet');
+const Heartbeat = require('Heartbeat');
+
+const Status = React.createClass({
+  propTypes: {
+    isOnline: bool,
+  },
+
+  render() {
+    if (this.props.isOnline === false) {
+      return (
+        <span
+          title="This dialect is currently unavailable."
+          className="dialect-picker__status dialect-picker__status--offline"
+        />
+      );
+    }
+    else {
+      return null;
+    }
+  }
+});
 
 var DialectPicker = React.createClass({
   displayName: "DialectPicker",
@@ -36,7 +57,10 @@ var DialectPicker = React.createClass({
 
     return (
       <div key={dialect} onClick={this.props.onClick} className={className}>
-        <a href={`#/dialects/${dialect}`}>{dialect}</a>
+        <a href={`#/dialects/${dialect}`}>
+          {dialect}
+          <Status isOnline={Heartbeat.isChannelOpen(dialect)} />
+        </a>
       </div>
     );
   }
