@@ -6,6 +6,5 @@ if [ ! -d "./node_modules" ]; then
 fi
 
 ./node_modules/mocha/bin/mocha \
-  -r lib/test.js \
-  $(find lib -name '*.test.js') \
+  lib/**/*.test.js \
   $@

@@ -1,1 +1,10 @@
-{}
+{
+  "i": "Caseless: letters in the pattern match both upper and lower case letters",
+  "m": "Multiline",
+  "s": "Dot-all: a dot metacharacter in the pattern matches all characters, including newlines.",
+  "x": "Extended: whitespace data characters in the pattern are totally ignored except when escaped or inside a character class, and characters between an unescaped # outside a character class and the next newline character, inclusive, are also ignored.",
+  "U": "Ungreedy: This modifier inverts the \"greediness\" of the quantifiers so that they are not greedy by default, but become greedy if followed by ?",
+  "X": "Extra: Any backslash in a pattern that is followed by a letter that has no special meaning causes an error, thus reserving these combinations for future expansion.",
+  "u": "UTF-8: pattern strings are treated as UTF-8.",
+  "J": "DUPNAMES: Allow duplicate names for subpatterns"
+}

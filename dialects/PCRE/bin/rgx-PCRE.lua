@@ -36,16 +36,6 @@ local function matcher(raw_pattern, subject, flags)
   return { rex_or_msg:exec(subject) }
 end
 
-local flags = {
-  ["i"] = "makes matching case insensitive",
-  ["m"] = "matching will span across line feeds",
-  ["s"] = "makes .* match everything, including control characters",
-  ["x"] = "Extended",
-  ["U"] = "Ungreedy",
-  ["X"] = "Extra",
-  ["J"] = "Duplicate names"
-}
-
 local function onInput(json_construct)
   local construct = json.decode(json_construct)
 
@@ -97,12 +87,10 @@ end
 print('ready')
 
 while true do
-  local json_construct = io.read("*l")
+  local message, err = io.read("*l")
 
-  -- print('decoding ' .. tostring(json_construct))
-
-  if json_construct then
-    print(json.encode(onInput(json_construct)))
+  if message then
+    print(json.encode(onInput(message)))
   else
     break
   end
