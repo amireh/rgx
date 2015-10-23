@@ -1,9 +1,28 @@
 # rgx
 
-An interface for writing and checking [PCRE](http://www.pcre.org) regular expressions.
-[rgx](http://www.rgx.com) is similar to what [Rubular](http://www.rubular.com) is for Ruby's regexes.
+A web application for writing and checking regular expressions in multiple 
+dialects.
 
-## Spec
+Visit www.rgx.io for the actual application.
+
+## Installation
+
+Required packages for core:
+
+- `node.js` (v0.12+ or v4.0+) and its package manager `npm`
+- elasticsearch
+
+- `npm install` inside the root to get the node packages ready
+
+To get the dialects set-up, visit each dialect's README under `dialects/`.
+
+## Running
+
+`/path/to/node ./server.js`
+
+## Development
+
+### Construct Spec
 
 **Capture sample**
 
@@ -24,51 +43,7 @@ An interface for writing and checking [PCRE](http://www.pcre.org) regular expres
 }
 ```
 
-## The Lua part
-
-Uses [lrexlib-pcre](http://rrthomas.github.com/lrexlib/manual.html) to test a PCRE
-pattern on a subject.
-
-The script can be invoked with a pattern and a subject to
-test and the results will be thrown out to STDOUT in either
-readable, formatted way (default) or a compact one (--compact).
-
-The script can also be daemonized (-d) to accept newline-delimited
-JSON array messages that contain the pattern as the first element
-and the subject as the second one.
-
-**Dependencies**
-
-You can get all the dependencies using [luarocks](http://www.luarocks.org/). They are:
-
-* lrexlib-pcre
-* lua_cliargs
-* dkjson
-* luasocket (only when using the daemonized mode)
-* luasignal (only when using the daemonized mode)
-
-## The Ruby part
-
-A minial Sinatra Ruby server that accepts `GET '/'` for displaying
-the HTML interface, and `POST '/'` for invoking `rgx.lua` in
-the compact mode and passing the result back as JSON.
-
-**Dependencies**
-
-* the Sinatra gem
-* dm-core
-* dm-migrations
-* dm-mysql-adapter
-
-## The HTML interface
-
-It's composed of a simple HTML view and a CSS file. The only JavaScript
-dependency is jQuery.
-
-I plan on using WebSockets instead of AJAX for querying later on at which
-point the jQuery dependency can be safely removed.
-
-## Licensing
+## License
 
 This file is part of rgx.
 
