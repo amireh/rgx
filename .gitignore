@@ -5,7 +5,6 @@ config/database.yml
 
 # assets
 *.zip
-vendor
 
 # env
 /node_modules
