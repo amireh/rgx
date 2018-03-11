@@ -19,12 +19,8 @@
 --
 ------------------
 
--- local rgx   = rgx
 local json  = require 'dkjson'
-
--- if not rgx or not rgx.test_construct then
---   return error("rgx.lua: _G['rgx'] or rgx.test_construct implementation is missing!")
--- end
+local io = require 'io'
 
 local function matcher(pattern, subject, flags)
   local success, match_or_error = pcall(function()
@@ -36,19 +32,6 @@ local function matcher(pattern, subject, flags)
   else
     return match_or_error
   end
-
-  -- offset the match starting point (if any) by -1 because Lua indexing starts at 1
-  -- if match[1] then
-  --   match = {
-  --     table.remove(match, 1) -1, -- the match begin offset
-  --     table.remove(match, 1) -1, -- the match end offset
-  --     match -- the captures, if any
-  --   }
-  -- else
-  --   return nil, "invalid regular expression; " .. match[1]
-  -- end
-
-  -- return match
 end
 
 local function onInput(json_construct)
@@ -95,7 +78,8 @@ local function onInput(json_construct)
   }
 end
 
-print('ready')
+io.stdout:write('ready\n')
+io.stdout:flush()
 
 while true do
   local message, _ = io.read("*l")
@@ -106,13 +90,3 @@ while true do
     break
   end
 end
-
--- rgx.Lua = {
---   test = function(json_construct)
---     return rgx.test_construct(json_construct, matcher)
---   end,
-
---   flags = function()
---     return json.encode(flags)
---   end
--- }

@@ -21,6 +21,7 @@
 -- Uses lrexlib's pcre module to test a PCRE pattern on a subject.
 --
 ------------------
+local io        = require 'io'
 local rex_pcre  = require 'rex_pcre'
 local json      = require 'dkjson'
 
@@ -82,7 +83,8 @@ local function onInput(json_construct)
   end
 end
 
-print('ready')
+io.stdout:write('ready\n')
+io.stdout:flush()
 
 while true do
   local message, _ = io.read("*l")
