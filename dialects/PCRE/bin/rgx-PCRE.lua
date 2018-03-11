@@ -26,7 +26,7 @@ local json      = require 'dkjson'
 
 local function matcher(raw_pattern, subject, flags)
   -- embed the compilation flags inline-style
-  pattern = '(?' .. (flags or '') .. ':' .. raw_pattern .. ')'
+  local pattern = '(?' .. (flags or '') .. ':' .. raw_pattern .. ')'
 
   local success, rex_or_msg = pcall(rex_pcre.new, pattern)
   if not success then
@@ -57,8 +57,8 @@ local function onInput(json_construct)
   end
 
   if #result > 0 then
-    captures = {}
-    offset = {}
+    local captures = {}
+    local offset = {}
 
     -- offset the match starting point (if any) by -1 because Lua indexing starts at 1
     if result[1] then
@@ -67,9 +67,7 @@ local function onInput(json_construct)
 
     -- map the captures as [b,e] offset arrays
     for i=1,#result[3],2 do
-      if result[3][i] == false or result[3][i+1] < result[3][i] then
-        -- table.insert(captures, {})
-      else
+      if not (result[3][i] == false or result[3][i+1] < result[3][i]) then
         table.insert(captures, { result[3][i]-1, result[3][i+1] })
       end
     end
@@ -87,7 +85,7 @@ end
 print('ready')
 
 while true do
-  local message, err = io.read("*l")
+  local message, _ = io.read("*l")
 
   if message then
     print(json.encode(onInput(message)))

@@ -7,6 +7,7 @@ exports.SIGNAL_READY = 'ready\n';
 exports.HEARTBEAT_PULSE = 5 * 60 * 1000;
 
 exports.DIALECT_BINMAP = {
+  'Lua': 'rgx-Lua.lua',
   'PCRE': 'rgx-PCRE.lua',
   'Ruby': 'rgx-Ruby.rb',
   'Perl': 'rgx-Perl.pm',
@@ -24,7 +25,7 @@ exports.AVAILABLE_DIALECTS = [
   // 'C++',
   // 'Java',
   'JavaScript',
-  // 'Lua',
+  'Lua',
   'PCRE',
   // 'PHP',
   'Perl',
