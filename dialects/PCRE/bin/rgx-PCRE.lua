@@ -90,7 +90,8 @@ while true do
   local message, _ = io.read("*l")
 
   if message then
-    print(json.encode(onInput(message)))
+    io.stdout:write(json.encode(onInput(message)) .. "\n")
+    io.stdout:flush()
   else
     break
   end
